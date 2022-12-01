@@ -1,0 +1,26 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+    <file>icons/committer.png</file>
+    <file>icons/user.svg</file>
+    <file>icons/branch.svg</file>
+    <file>icons/draft.svg</file>
+    <file>icons/mailto.svg</file>
+    <file>icons/browser.svg</file>
+    <file>icons/keywords.svg</file>
+    <file>icons/module.svg</file>
+    <file>icons/os.svg</file>
+    <file>icons/pri.svg</file>
+    <file>icons/product.svg</file>
+    <file>icons/project.svg</file>
+    <file>icons/severity.svg</file>
+    <file>icons/template.svg</file>
+    <file>icons/title.svg</file>
+    <file>icons/type.svg</file>
+    <file>icons/my.svg</file>
+    <file>icons/assigned.svg</file>
+    <file>icons/save.svg</file>
+    <file>icons/commit.svg</file>
+    <file>icons/version.svg</file>
+    <file>icons/password.svg</file>
+</qresource>
+</RCC>

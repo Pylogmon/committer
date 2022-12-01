@@ -5,6 +5,8 @@ from requests.exceptions import MissingSchema
 from requests.exceptions import InvalidSchema
 from committer.ui.UI_login import Ui_Login
 from PySide2.QtCore import Signal, QTimer
+from PySide2.QtGui import QIcon, QPixmap
+from committer.resource import rc_icons
 from requests import post
 import json
 import os
@@ -19,8 +21,8 @@ class Login(QWidget, Ui_Login):
         self.login_file = StandardPath.login_file()
         self.login_info = {}
         self.setupUi(self)
+        self.init_ui()
         self.init_connect()
-        self.setWindowTitle("Login")
         self.show()
 
     # 初始化信号槽
@@ -98,3 +100,14 @@ class Login(QWidget, Ui_Login):
     # 显示警告信息
     def warning(self, title, message):
         QMessageBox.warning(self, title, message)
+
+    def init_ui(self):
+        self.setWindowTitle("Login")
+        self.setWindowIcon(QIcon(QPixmap(":/icons/committer.png")))
+        size = self.user_name_icon.height()
+        self.user_name_icon.setPixmap(
+            QPixmap(":/icons/user.svg").scaled(size, size))
+        self.server_icon.setPixmap(
+            QPixmap(":/icons/browser.svg").scaled(size, size))
+        self.password_icon.setPixmap(
+            QPixmap(":/icons/password.svg").scaled(size, size))

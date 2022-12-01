@@ -30,44 +30,59 @@ class Ui_Login(object):
 
         self.gridLayout = QGridLayout()
         self.gridLayout.setObjectName(u"gridLayout")
+        self.server_icon = QLabel(Login)
+        self.server_icon.setObjectName(u"server_icon")
+
+        self.gridLayout.addWidget(self.server_icon, 0, 0, 1, 1)
+
         self.server_label = QLabel(Login)
         self.server_label.setObjectName(u"server_label")
 
-        self.gridLayout.addWidget(self.server_label, 0, 0, 1, 1)
+        self.gridLayout.addWidget(self.server_label, 0, 1, 1, 1)
 
         self.server_edit = QLineEdit(Login)
         self.server_edit.setObjectName(u"server_edit")
         self.server_edit.setMinimumSize(QSize(250, 0))
 
-        self.gridLayout.addWidget(self.server_edit, 0, 1, 1, 1)
+        self.gridLayout.addWidget(self.server_edit, 0, 2, 1, 1)
+
+        self.user_name_icon = QLabel(Login)
+        self.user_name_icon.setObjectName(u"user_name_icon")
+
+        self.gridLayout.addWidget(self.user_name_icon, 1, 0, 1, 1)
 
         self.user_name_label = QLabel(Login)
         self.user_name_label.setObjectName(u"user_name_label")
 
-        self.gridLayout.addWidget(self.user_name_label, 1, 0, 1, 1)
+        self.gridLayout.addWidget(self.user_name_label, 1, 1, 1, 1)
 
         self.user_name_edit = QLineEdit(Login)
         self.user_name_edit.setObjectName(u"user_name_edit")
         self.user_name_edit.setMinimumSize(QSize(250, 0))
 
-        self.gridLayout.addWidget(self.user_name_edit, 1, 1, 1, 1)
+        self.gridLayout.addWidget(self.user_name_edit, 1, 2, 1, 1)
+
+        self.password_icon = QLabel(Login)
+        self.password_icon.setObjectName(u"password_icon")
+
+        self.gridLayout.addWidget(self.password_icon, 2, 0, 1, 1)
 
         self.password_label = QLabel(Login)
         self.password_label.setObjectName(u"password_label")
 
-        self.gridLayout.addWidget(self.password_label, 2, 0, 1, 1)
+        self.gridLayout.addWidget(self.password_label, 2, 1, 1, 1)
 
         self.password_edit = QLineEdit(Login)
         self.password_edit.setObjectName(u"password_edit")
         self.password_edit.setMinimumSize(QSize(250, 0))
         self.password_edit.setEchoMode(QLineEdit.Password)
 
-        self.gridLayout.addWidget(self.password_edit, 2, 1, 1, 1)
+        self.gridLayout.addWidget(self.password_edit, 2, 2, 1, 1)
 
         self.login_btn = QPushButton(Login)
         self.login_btn.setObjectName(u"login_btn")
 
-        self.gridLayout.addWidget(self.login_btn, 3, 0, 1, 2)
+        self.gridLayout.addWidget(self.login_btn, 3, 0, 1, 3)
 
 
         self.gridLayout_2.addLayout(self.gridLayout, 1, 1, 1, 1)
@@ -88,10 +103,13 @@ class Ui_Login(object):
 
     def retranslateUi(self, Login):
         Login.setWindowTitle(QCoreApplication.translate("Login", u"Form", None))
+        self.server_icon.setText(QCoreApplication.translate("Login", u"A", None))
         self.server_label.setText(QCoreApplication.translate("Login", u"Server:", None))
         self.server_edit.setText(QCoreApplication.translate("Login", u"http://127.0.0.1:9000", None))
+        self.user_name_icon.setText(QCoreApplication.translate("Login", u"A", None))
         self.user_name_label.setText(QCoreApplication.translate("Login", u"UserName:", None))
         self.user_name_edit.setText(QCoreApplication.translate("Login", u"LiMin", None))
+        self.password_icon.setText(QCoreApplication.translate("Login", u"A", None))
         self.password_label.setText(QCoreApplication.translate("Login", u"Password:", None))
         self.password_edit.setText(QCoreApplication.translate("Login", u"666666", None))
         self.login_btn.setText(QCoreApplication.translate("Login", u"Login", None))
