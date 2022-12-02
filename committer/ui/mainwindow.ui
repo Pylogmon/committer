@@ -16,17 +16,37 @@
   <layout class="QGridLayout" name="gridLayout_5">
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout_2">
-     <item row="0" column="0">
-      <widget class="QPushButton" name="my_commit_btn">
+     <item row="0" column="1">
+      <widget class="QPushButton" name="assigned_me_btn">
+       <property name="toolTip">
+        <string>待处理 查看指派给我的工单</string>
+       </property>
        <property name="text">
-        <string>My Commit</string>
+        <string>待处理</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="QPushButton" name="assigned_me_btn">
+     <item row="0" column="0">
+      <widget class="QPushButton" name="my_commit_btn">
+       <property name="toolTip">
+        <string>我的提交 查看我提交的工单</string>
+       </property>
        <property name="text">
-        <string>Assigned Me</string>
+        <string>我的提交</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="4">
+      <widget class="QLabel" name="user_name_icon">
+       <property name="text">
+        <string>A</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="6">
+      <widget class="QPushButton" name="logout_btn">
+       <property name="text">
+        <string>退出登录</string>
        </property>
       </widget>
      </item>
@@ -43,14 +63,7 @@
        </property>
       </spacer>
      </item>
-     <item row="0" column="3">
-      <widget class="QLabel" name="user_name_icon">
-       <property name="text">
-        <string>A</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="4">
+     <item row="0" column="5">
       <widget class="QLabel" name="user_name_label">
        <property name="text">
         <string>Username</string>
@@ -71,7 +84,7 @@
      <item row="0" column="1">
       <widget class="QLabel" name="product_label">
        <property name="text">
-        <string>Product:</string>
+        <string>所属产品</string>
        </property>
       </widget>
      </item>
@@ -83,8 +96,14 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;所属产品 &lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;必填&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
        <property name="layoutDirection">
         <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="placeholderText">
+        <string/>
        </property>
       </widget>
      </item>
@@ -98,7 +117,7 @@
      <item row="0" column="4">
       <widget class="QLabel" name="project_label">
        <property name="text">
-        <string>Project:</string>
+        <string>所属项目</string>
        </property>
       </widget>
      </item>
@@ -109,6 +128,9 @@
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;所属项目 &lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;必填&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </item>
@@ -122,7 +144,7 @@
      <item row="0" column="7">
       <widget class="QLabel" name="module_label">
        <property name="text">
-        <string>Module:</string>
+        <string>所属模块</string>
        </property>
       </widget>
      </item>
@@ -133,6 +155,9 @@
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>所属模块 选填</string>
        </property>
       </widget>
      </item>
@@ -146,7 +171,7 @@
      <item row="0" column="10">
       <widget class="QLabel" name="branch_label">
        <property name="text">
-        <string>Branch:</string>
+        <string>所属分支</string>
        </property>
       </widget>
      </item>
@@ -157,6 +182,9 @@
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>所属分支 选填</string>
        </property>
       </widget>
      </item>
@@ -170,7 +198,7 @@
      <item row="1" column="1">
       <widget class="QLabel" name="type_label">
        <property name="text">
-        <string>Type:</string>
+        <string>Bug类型</string>
        </property>
       </widget>
      </item>
@@ -181,6 +209,9 @@
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bug类型 &lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;必填&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </item>
@@ -194,7 +225,7 @@
      <item row="1" column="4">
       <widget class="QLabel" name="severity_label">
        <property name="text">
-        <string>Severity:</string>
+        <string>严重程度</string>
        </property>
       </widget>
      </item>
@@ -205,6 +236,9 @@
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;严重程度 &lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;必填&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </item>
@@ -218,7 +252,7 @@
      <item row="1" column="7">
       <widget class="QLabel" name="pri_label">
        <property name="text">
-        <string>Pri:</string>
+        <string>优先级</string>
        </property>
       </widget>
      </item>
@@ -230,6 +264,9 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;优先级 &lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;必填&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
       </widget>
      </item>
      <item row="1" column="9">
@@ -240,14 +277,11 @@
       </widget>
      </item>
      <item row="1" column="10">
-      <widget class="QLabel" name="version_label">
+      <widget class="QLabel" name="assigned_label">
        <property name="text">
-        <string>Version:</string>
+        <string>指派给</string>
        </property>
       </widget>
-     </item>
-     <item row="1" column="11">
-      <widget class="QLineEdit" name="version_edit"/>
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="os_icon">
@@ -259,7 +293,7 @@
      <item row="2" column="1">
       <widget class="QLabel" name="os_label">
        <property name="text">
-        <string>OS:</string>
+        <string>操作系统</string>
        </property>
       </widget>
      </item>
@@ -270,6 +304,9 @@
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>操作系统 选填</string>
        </property>
       </widget>
      </item>
@@ -283,7 +320,7 @@
      <item row="2" column="4">
       <widget class="QLabel" name="browser_label">
        <property name="text">
-        <string>Browser:</string>
+        <string>浏览器</string>
        </property>
       </widget>
      </item>
@@ -294,6 +331,9 @@
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>浏览器 选填</string>
        </property>
       </widget>
      </item>
@@ -307,7 +347,7 @@
      <item row="2" column="7">
       <widget class="QLabel" name="draft_label">
        <property name="text">
-        <string>Draft:</string>
+        <string>草稿箱</string>
        </property>
       </widget>
      </item>
@@ -318,6 +358,9 @@
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>草稿箱 选择保存的草稿继续编辑</string>
        </property>
       </widget>
      </item>
@@ -331,7 +374,7 @@
      <item row="2" column="10">
       <widget class="QLabel" name="template_label">
        <property name="text">
-        <string>Template:</string>
+        <string>选择模板</string>
        </property>
       </widget>
      </item>
@@ -342,6 +385,16 @@
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>选择模板 复用模板快速编辑</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="11">
+      <widget class="QComboBox" name="assigned_box">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;指派给 &lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;必填&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </item>
@@ -359,12 +412,22 @@
      <item row="0" column="1">
       <widget class="QLabel" name="title_label">
        <property name="text">
-        <string>Title:</string>
+        <string>标题</string>
        </property>
       </widget>
      </item>
      <item row="0" column="2">
-      <widget class="QLineEdit" name="title_edit"/>
+      <widget class="QLineEdit" name="title_edit">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;标题 &lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;必填&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="placeholderText">
+        <string>标题不能为空</string>
+       </property>
+      </widget>
      </item>
      <item row="1" column="0">
       <widget class="QLabel" name="keywords_icon">
@@ -376,55 +439,72 @@
      <item row="1" column="1">
       <widget class="QLabel" name="keywords_label">
        <property name="text">
-        <string>Keywords:</string>
+        <string>关键词</string>
        </property>
       </widget>
      </item>
      <item row="1" column="2">
-      <widget class="QLineEdit" name="keywords_edit"/>
+      <widget class="QLineEdit" name="keywords_edit">
+       <property name="toolTip">
+        <string>关键词 选填</string>
+       </property>
+       <property name="placeholderText">
+        <string>多个关键词用;隔开</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
    <item row="3" column="0">
-    <widget class="QPlainTextEdit" name="main_edit"/>
+    <widget class="QPlainTextEdit" name="main_edit">
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;主要内容 描述复现步骤 定位思路 &lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;必填&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
    </item>
    <item row="4" column="0">
     <layout class="QGridLayout" name="gridLayout_4">
-     <item row="0" column="0">
-      <widget class="QLabel" name="mailto_icon">
-       <property name="text">
-        <string>A</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="mailto_label">
-       <property name="text">
-        <string>Mailto:</string>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="2">
-      <widget class="QLineEdit" name="mailto_edit"/>
-     </item>
-     <item row="0" column="3">
       <widget class="QPushButton" name="save_to_draft_btn">
+       <property name="toolTip">
+        <string>将当前编辑内容保存为草稿</string>
+       </property>
        <property name="text">
-        <string>Save to Draft</string>
+        <string>保存为草稿</string>
        </property>
       </widget>
      </item>
      <item row="0" column="4">
-      <widget class="QPushButton" name="save_to_template_btn">
+      <widget class="QPushButton" name="commit_btn">
        <property name="text">
-        <string>Save to Template</string>
+        <string>提交</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="5">
-      <widget class="QPushButton" name="commit_btn">
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="mailto_edit">
+       <property name="toolTip">
+        <string>抄送 选填</string>
+       </property>
+       <property name="placeholderText">
+        <string>抄送,多个邮箱用;隔开</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="3">
+      <widget class="QPushButton" name="save_to_template_btn">
+       <property name="toolTip">
+        <string>将当前内容作为模板保存</string>
+       </property>
        <property name="text">
-        <string>Commit</string>
+        <string>保存为模板</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="mailto_icon">
+       <property name="text">
+        <string>A</string>
        </property>
       </widget>
      </item>

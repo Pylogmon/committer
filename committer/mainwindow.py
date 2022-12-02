@@ -4,21 +4,29 @@ from committer.utils.uitools import set_size
 from PySide2.QtGui import QIcon, QPixmap
 from committer.resource import rc_icons
 from PySide2.QtWidgets import QWidget
+from PySide2.QtCore import Signal
+import json
 import os
 
 
 class MainWindow(QWidget, Ui_MainWindow):
+
+    logout_success = Signal()
 
     def __init__(self, username):
         super(MainWindow, self).__init__()
         self.user_name = username
         self.setupUi(self)
         self.init_ui()
+        self.init_connect()
 
     def init_ui(self):
         self.set_icons()
         self.set_boxes()
         self.set_other_ui()
+
+    def init_connect(self):
+        self.logout_btn.clicked.connect(self.logout)
 
     def set_icons(self):
         self.setWindowIcon(QIcon(QPixmap(":/icons/committer.png")))
@@ -114,3 +122,14 @@ class MainWindow(QWidget, Ui_MainWindow):
     def build_json(self):
         data = {'meta': {}, "auth": {}}
         data['meta']['product'] = self.product_box.currentText()
+
+    def logout(self):
+        login_file = StandardPath.login_file()
+        with open(login_file, 'r', encoding='utf-8') as f:
+            login_info = json.load(f)
+        login_info["user_name"] = ""
+        login_info["password"] = ""
+        with open(login_file, 'w', encoding='utf-8') as f:
+            json.dump(login_info, f)
+        self.logout_success.emit()
+        self.close()

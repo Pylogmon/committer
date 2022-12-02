@@ -28,26 +28,26 @@ class Login(QWidget, Ui_Login):
 
     # 初始化信号槽
     def init_connect(self):
-        QTimer.singleShot(2000, self.auto_login)
-        self.login_btn.clicked.connect(self.manual_login)
+        # 使窗口加载完成后再自动登录
+        QTimer.singleShot(0, self.auto_login)
+        self.login_btn.clicked.connect(self.login)
 
     # 自动登陆
     def auto_login(self):
         if os.path.exists(self.login_file):
             with open(self.login_file, 'r', encoding='utf-8') as f:
                 self.login_info = json.load(f)
-            self.login()
-
-    # 手动登陆
-    def manual_login(self):
-        if self.check():
-            self.get_data()
+            self.server_edit.setText(self.login_info["server"])
+            self.user_name_edit.setText(self.login_info["user_name"])
+            self.password_edit.setText(self.login_info["password"])
             self.login()
 
     def login(self):
-        # 构造请求参数
+        if not self.check():
+            return
+        self.get_data()
         params = {
-            "username": self.login_info["user_name"],
+            "user_name": self.login_info["user_name"],
             "password": self.login_info["password"]
         }
         try:

@@ -14,6 +14,7 @@ from PySide2.QtWidgets import *
 
 
 class Ui_MainWindow(object):
+
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
@@ -22,30 +23,35 @@ class Ui_MainWindow(object):
         self.gridLayout_5.setObjectName(u"gridLayout_5")
         self.gridLayout_2 = QGridLayout()
         self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.my_commit_btn = QPushButton(MainWindow)
-        self.my_commit_btn.setObjectName(u"my_commit_btn")
-
-        self.gridLayout_2.addWidget(self.my_commit_btn, 0, 0, 1, 1)
-
         self.assigned_me_btn = QPushButton(MainWindow)
         self.assigned_me_btn.setObjectName(u"assigned_me_btn")
 
         self.gridLayout_2.addWidget(self.assigned_me_btn, 0, 1, 1, 1)
 
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.my_commit_btn = QPushButton(MainWindow)
+        self.my_commit_btn.setObjectName(u"my_commit_btn")
 
-        self.gridLayout_2.addItem(self.horizontalSpacer, 0, 2, 1, 1)
+        self.gridLayout_2.addWidget(self.my_commit_btn, 0, 0, 1, 1)
 
         self.user_name_icon = QLabel(MainWindow)
         self.user_name_icon.setObjectName(u"user_name_icon")
 
-        self.gridLayout_2.addWidget(self.user_name_icon, 0, 3, 1, 1)
+        self.gridLayout_2.addWidget(self.user_name_icon, 0, 4, 1, 1)
+
+        self.logout_btn = QPushButton(MainWindow)
+        self.logout_btn.setObjectName(u"logout_btn")
+
+        self.gridLayout_2.addWidget(self.logout_btn, 0, 6, 1, 1)
+
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding,
+                                            QSizePolicy.Minimum)
+
+        self.gridLayout_2.addItem(self.horizontalSpacer, 0, 2, 1, 1)
 
         self.user_name_label = QLabel(MainWindow)
         self.user_name_label.setObjectName(u"user_name_label")
 
-        self.gridLayout_2.addWidget(self.user_name_label, 0, 4, 1, 1)
-
+        self.gridLayout_2.addWidget(self.user_name_label, 0, 5, 1, 1)
 
         self.gridLayout_5.addLayout(self.gridLayout_2, 0, 0, 1, 1)
 
@@ -66,7 +72,8 @@ class Ui_MainWindow(object):
         sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.product_box.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.product_box.sizePolicy().hasHeightForWidth())
         self.product_box.setSizePolicy(sizePolicy)
         self.product_box.setLayoutDirection(Qt.LeftToRight)
 
@@ -84,7 +91,8 @@ class Ui_MainWindow(object):
 
         self.project_box = QComboBox(MainWindow)
         self.project_box.setObjectName(u"project_box")
-        sizePolicy.setHeightForWidth(self.project_box.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.project_box.sizePolicy().hasHeightForWidth())
         self.project_box.setSizePolicy(sizePolicy)
 
         self.gridLayout.addWidget(self.project_box, 0, 5, 1, 1)
@@ -101,7 +109,8 @@ class Ui_MainWindow(object):
 
         self.module_box = QComboBox(MainWindow)
         self.module_box.setObjectName(u"module_box")
-        sizePolicy.setHeightForWidth(self.module_box.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.module_box.sizePolicy().hasHeightForWidth())
         self.module_box.setSizePolicy(sizePolicy)
 
         self.gridLayout.addWidget(self.module_box, 0, 8, 1, 1)
@@ -118,7 +127,8 @@ class Ui_MainWindow(object):
 
         self.branch_box = QComboBox(MainWindow)
         self.branch_box.setObjectName(u"branch_box")
-        sizePolicy.setHeightForWidth(self.branch_box.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.branch_box.sizePolicy().hasHeightForWidth())
         self.branch_box.setSizePolicy(sizePolicy)
 
         self.gridLayout.addWidget(self.branch_box, 0, 11, 1, 1)
@@ -135,7 +145,8 @@ class Ui_MainWindow(object):
 
         self.type_box = QComboBox(MainWindow)
         self.type_box.setObjectName(u"type_box")
-        sizePolicy.setHeightForWidth(self.type_box.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.type_box.sizePolicy().hasHeightForWidth())
         self.type_box.setSizePolicy(sizePolicy)
 
         self.gridLayout.addWidget(self.type_box, 1, 2, 1, 1)
@@ -152,7 +163,8 @@ class Ui_MainWindow(object):
 
         self.severity_box = QComboBox(MainWindow)
         self.severity_box.setObjectName(u"severity_box")
-        sizePolicy.setHeightForWidth(self.severity_box.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.severity_box.sizePolicy().hasHeightForWidth())
         self.severity_box.setSizePolicy(sizePolicy)
 
         self.gridLayout.addWidget(self.severity_box, 1, 5, 1, 1)
@@ -169,7 +181,8 @@ class Ui_MainWindow(object):
 
         self.pri_box = QComboBox(MainWindow)
         self.pri_box.setObjectName(u"pri_box")
-        sizePolicy.setHeightForWidth(self.pri_box.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.pri_box.sizePolicy().hasHeightForWidth())
         self.pri_box.setSizePolicy(sizePolicy)
 
         self.gridLayout.addWidget(self.pri_box, 1, 8, 1, 1)
@@ -179,15 +192,10 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.version_icon, 1, 9, 1, 1)
 
-        self.version_label = QLabel(MainWindow)
-        self.version_label.setObjectName(u"version_label")
+        self.assigned_label = QLabel(MainWindow)
+        self.assigned_label.setObjectName(u"assigned_label")
 
-        self.gridLayout.addWidget(self.version_label, 1, 10, 1, 1)
-
-        self.version_edit = QLineEdit(MainWindow)
-        self.version_edit.setObjectName(u"version_edit")
-
-        self.gridLayout.addWidget(self.version_edit, 1, 11, 1, 1)
+        self.gridLayout.addWidget(self.assigned_label, 1, 10, 1, 1)
 
         self.os_icon = QLabel(MainWindow)
         self.os_icon.setObjectName(u"os_icon")
@@ -201,7 +209,8 @@ class Ui_MainWindow(object):
 
         self.os_box = QComboBox(MainWindow)
         self.os_box.setObjectName(u"os_box")
-        sizePolicy.setHeightForWidth(self.os_box.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.os_box.sizePolicy().hasHeightForWidth())
         self.os_box.setSizePolicy(sizePolicy)
 
         self.gridLayout.addWidget(self.os_box, 2, 2, 1, 1)
@@ -218,7 +227,8 @@ class Ui_MainWindow(object):
 
         self.browser_box = QComboBox(MainWindow)
         self.browser_box.setObjectName(u"browser_box")
-        sizePolicy.setHeightForWidth(self.browser_box.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.browser_box.sizePolicy().hasHeightForWidth())
         self.browser_box.setSizePolicy(sizePolicy)
 
         self.gridLayout.addWidget(self.browser_box, 2, 5, 1, 1)
@@ -235,7 +245,8 @@ class Ui_MainWindow(object):
 
         self.draft_box = QComboBox(MainWindow)
         self.draft_box.setObjectName(u"draft_box")
-        sizePolicy.setHeightForWidth(self.draft_box.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.draft_box.sizePolicy().hasHeightForWidth())
         self.draft_box.setSizePolicy(sizePolicy)
 
         self.gridLayout.addWidget(self.draft_box, 2, 8, 1, 1)
@@ -252,11 +263,16 @@ class Ui_MainWindow(object):
 
         self.template_box = QComboBox(MainWindow)
         self.template_box.setObjectName(u"template_box")
-        sizePolicy.setHeightForWidth(self.template_box.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.template_box.sizePolicy().hasHeightForWidth())
         self.template_box.setSizePolicy(sizePolicy)
 
         self.gridLayout.addWidget(self.template_box, 2, 11, 1, 1)
 
+        self.assigned_box = QComboBox(MainWindow)
+        self.assigned_box.setObjectName(u"assigned_box")
+
+        self.gridLayout.addWidget(self.assigned_box, 1, 11, 1, 1)
 
         self.gridLayout_5.addLayout(self.gridLayout, 1, 0, 1, 1)
 
@@ -292,7 +308,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout_3.addWidget(self.keywords_edit, 1, 2, 1, 1)
 
-
         self.gridLayout_5.addLayout(self.gridLayout_3, 2, 0, 1, 1)
 
         self.main_edit = QPlainTextEdit(MainWindow)
@@ -302,83 +317,278 @@ class Ui_MainWindow(object):
 
         self.gridLayout_4 = QGridLayout()
         self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.save_to_draft_btn = QPushButton(MainWindow)
+        self.save_to_draft_btn.setObjectName(u"save_to_draft_btn")
+
+        self.gridLayout_4.addWidget(self.save_to_draft_btn, 0, 2, 1, 1)
+
+        self.commit_btn = QPushButton(MainWindow)
+        self.commit_btn.setObjectName(u"commit_btn")
+
+        self.gridLayout_4.addWidget(self.commit_btn, 0, 4, 1, 1)
+
+        self.mailto_edit = QLineEdit(MainWindow)
+        self.mailto_edit.setObjectName(u"mailto_edit")
+
+        self.gridLayout_4.addWidget(self.mailto_edit, 0, 1, 1, 1)
+
+        self.save_to_template_btn = QPushButton(MainWindow)
+        self.save_to_template_btn.setObjectName(u"save_to_template_btn")
+
+        self.gridLayout_4.addWidget(self.save_to_template_btn, 0, 3, 1, 1)
+
         self.mailto_icon = QLabel(MainWindow)
         self.mailto_icon.setObjectName(u"mailto_icon")
 
         self.gridLayout_4.addWidget(self.mailto_icon, 0, 0, 1, 1)
 
-        self.mailto_label = QLabel(MainWindow)
-        self.mailto_label.setObjectName(u"mailto_label")
-
-        self.gridLayout_4.addWidget(self.mailto_label, 0, 1, 1, 1)
-
-        self.mailto_edit = QLineEdit(MainWindow)
-        self.mailto_edit.setObjectName(u"mailto_edit")
-
-        self.gridLayout_4.addWidget(self.mailto_edit, 0, 2, 1, 1)
-
-        self.save_to_draft_btn = QPushButton(MainWindow)
-        self.save_to_draft_btn.setObjectName(u"save_to_draft_btn")
-
-        self.gridLayout_4.addWidget(self.save_to_draft_btn, 0, 3, 1, 1)
-
-        self.save_to_template_btn = QPushButton(MainWindow)
-        self.save_to_template_btn.setObjectName(u"save_to_template_btn")
-
-        self.gridLayout_4.addWidget(self.save_to_template_btn, 0, 4, 1, 1)
-
-        self.commit_btn = QPushButton(MainWindow)
-        self.commit_btn.setObjectName(u"commit_btn")
-
-        self.gridLayout_4.addWidget(self.commit_btn, 0, 5, 1, 1)
-
-
         self.gridLayout_5.addLayout(self.gridLayout_4, 4, 0, 1, 1)
-
 
         self.retranslateUi(MainWindow)
 
         QMetaObject.connectSlotsByName(MainWindow)
+
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Form", None))
-        self.my_commit_btn.setText(QCoreApplication.translate("MainWindow", u"My Commit", None))
-        self.assigned_me_btn.setText(QCoreApplication.translate("MainWindow", u"Assigned Me", None))
-        self.user_name_icon.setText(QCoreApplication.translate("MainWindow", u"A", None))
-        self.user_name_label.setText(QCoreApplication.translate("MainWindow", u"Username", None))
-        self.product_icon.setText(QCoreApplication.translate("MainWindow", u"A", None))
-        self.product_label.setText(QCoreApplication.translate("MainWindow", u"Product:", None))
-        self.project_icon.setText(QCoreApplication.translate("MainWindow", u"A", None))
-        self.project_label.setText(QCoreApplication.translate("MainWindow", u"Project:", None))
-        self.module_icon.setText(QCoreApplication.translate("MainWindow", u"A", None))
-        self.module_label.setText(QCoreApplication.translate("MainWindow", u"Module:", None))
-        self.branch_icon.setText(QCoreApplication.translate("MainWindow", u"A", None))
-        self.branch_label.setText(QCoreApplication.translate("MainWindow", u"Branch:", None))
-        self.type_icon.setText(QCoreApplication.translate("MainWindow", u"A", None))
-        self.type_label.setText(QCoreApplication.translate("MainWindow", u"Type:", None))
-        self.severity_icon.setText(QCoreApplication.translate("MainWindow", u"A", None))
-        self.severity_label.setText(QCoreApplication.translate("MainWindow", u"Severity:", None))
-        self.pri_icon.setText(QCoreApplication.translate("MainWindow", u"A", None))
-        self.pri_label.setText(QCoreApplication.translate("MainWindow", u"Pri:", None))
-        self.version_icon.setText(QCoreApplication.translate("MainWindow", u"A", None))
-        self.version_label.setText(QCoreApplication.translate("MainWindow", u"Version:", None))
-        self.os_icon.setText(QCoreApplication.translate("MainWindow", u"A", None))
-        self.os_label.setText(QCoreApplication.translate("MainWindow", u"OS:", None))
-        self.browser_icon.setText(QCoreApplication.translate("MainWindow", u"A", None))
-        self.browser_label.setText(QCoreApplication.translate("MainWindow", u"Browser:", None))
-        self.draft_icon.setText(QCoreApplication.translate("MainWindow", u"A", None))
-        self.draft_label.setText(QCoreApplication.translate("MainWindow", u"Draft:", None))
-        self.template_icon.setText(QCoreApplication.translate("MainWindow", u"A", None))
-        self.template_label.setText(QCoreApplication.translate("MainWindow", u"Template:", None))
-        self.title_icon.setText(QCoreApplication.translate("MainWindow", u"A", None))
-        self.title_label.setText(QCoreApplication.translate("MainWindow", u"Title:", None))
-        self.keywords_icon.setText(QCoreApplication.translate("MainWindow", u"A", None))
-        self.keywords_label.setText(QCoreApplication.translate("MainWindow", u"Keywords:", None))
-        self.mailto_icon.setText(QCoreApplication.translate("MainWindow", u"A", None))
-        self.mailto_label.setText(QCoreApplication.translate("MainWindow", u"Mailto:", None))
-        self.save_to_draft_btn.setText(QCoreApplication.translate("MainWindow", u"Save to Draft", None))
-        self.save_to_template_btn.setText(QCoreApplication.translate("MainWindow", u"Save to Template", None))
-        self.commit_btn.setText(QCoreApplication.translate("MainWindow", u"Commit", None))
-    # retranslateUi
+        MainWindow.setWindowTitle(
+            QCoreApplication.translate("MainWindow", u"Form", None))
+        #if QT_CONFIG(tooltip)
+        self.assigned_me_btn.setToolTip(
+            QCoreApplication.translate(
+                "MainWindow",
+                u"\u5f85\u5904\u7406 \u67e5\u770b\u6307\u6d3e\u7ed9\u6211\u7684\u5de5\u5355",
+                None))
+        #endif // QT_CONFIG(tooltip)
+        self.assigned_me_btn.setText(
+            QCoreApplication.translate("MainWindow", u"\u5f85\u5904\u7406",
+                                       None))
+        #if QT_CONFIG(tooltip)
+        self.my_commit_btn.setToolTip(
+            QCoreApplication.translate(
+                "MainWindow",
+                u"\u6211\u7684\u63d0\u4ea4 \u67e5\u770b\u6211\u63d0\u4ea4\u7684\u5de5\u5355",
+                None))
+        #endif // QT_CONFIG(tooltip)
+        self.my_commit_btn.setText(
+            QCoreApplication.translate("MainWindow",
+                                       u"\u6211\u7684\u63d0\u4ea4", None))
+        self.user_name_icon.setText(
+            QCoreApplication.translate("MainWindow", u"A", None))
+        self.logout_btn.setText(
+            QCoreApplication.translate("MainWindow",
+                                       u"\u9000\u51fa\u767b\u5f55", None))
+        self.user_name_label.setText(
+            QCoreApplication.translate("MainWindow", u"Username", None))
+        self.product_icon.setText(
+            QCoreApplication.translate("MainWindow", u"A", None))
+        self.product_label.setText(
+            QCoreApplication.translate("MainWindow",
+                                       u"\u6240\u5c5e\u4ea7\u54c1", None))
+        #if QT_CONFIG(tooltip)
+        self.product_box.setToolTip(
+            QCoreApplication.translate(
+                "MainWindow",
+                u"<html><head/><body><p>\u6240\u5c5e\u4ea7\u54c1 <span style=\" font-weight:600; color:#ff0000;\">\u5fc5\u586b</span></p></body></html>",
+                None))
+        #endif // QT_CONFIG(tooltip)
+        self.product_box.setPlaceholderText("")
+        self.project_icon.setText(
+            QCoreApplication.translate("MainWindow", u"A", None))
+        self.project_label.setText(
+            QCoreApplication.translate("MainWindow",
+                                       u"\u6240\u5c5e\u9879\u76ee", None))
+        #if QT_CONFIG(tooltip)
+        self.project_box.setToolTip(
+            QCoreApplication.translate(
+                "MainWindow",
+                u"<html><head/><body><p>\u6240\u5c5e\u9879\u76ee <span style=\" font-weight:600; color:#ff0000;\">\u5fc5\u586b</span></p></body></html>",
+                None))
+        #endif // QT_CONFIG(tooltip)
+        self.module_icon.setText(
+            QCoreApplication.translate("MainWindow", u"A", None))
+        self.module_label.setText(
+            QCoreApplication.translate("MainWindow",
+                                       u"\u6240\u5c5e\u6a21\u5757", None))
+        #if QT_CONFIG(tooltip)
+        self.module_box.setToolTip(
+            QCoreApplication.translate(
+                "MainWindow", u"\u6240\u5c5e\u6a21\u5757 \u9009\u586b", None))
+        #endif // QT_CONFIG(tooltip)
+        self.branch_icon.setText(
+            QCoreApplication.translate("MainWindow", u"A", None))
+        self.branch_label.setText(
+            QCoreApplication.translate("MainWindow",
+                                       u"\u6240\u5c5e\u5206\u652f", None))
+        #if QT_CONFIG(tooltip)
+        self.branch_box.setToolTip(
+            QCoreApplication.translate(
+                "MainWindow", u"\u6240\u5c5e\u5206\u652f \u9009\u586b", None))
+        #endif // QT_CONFIG(tooltip)
+        self.type_icon.setText(
+            QCoreApplication.translate("MainWindow", u"A", None))
+        self.type_label.setText(
+            QCoreApplication.translate("MainWindow", u"Bug\u7c7b\u578b", None))
+        #if QT_CONFIG(tooltip)
+        self.type_box.setToolTip(
+            QCoreApplication.translate(
+                "MainWindow",
+                u"<html><head/><body><p>Bug\u7c7b\u578b <span style=\" font-weight:600; color:#ff0000;\">\u5fc5\u586b</span></p></body></html>",
+                None))
+        #endif // QT_CONFIG(tooltip)
+        self.severity_icon.setText(
+            QCoreApplication.translate("MainWindow", u"A", None))
+        self.severity_label.setText(
+            QCoreApplication.translate("MainWindow",
+                                       u"\u4e25\u91cd\u7a0b\u5ea6", None))
+        #if QT_CONFIG(tooltip)
+        self.severity_box.setToolTip(
+            QCoreApplication.translate(
+                "MainWindow",
+                u"<html><head/><body><p>\u4e25\u91cd\u7a0b\u5ea6 <span style=\" font-weight:600; color:#ff0000;\">\u5fc5\u586b</span></p></body></html>",
+                None))
+        #endif // QT_CONFIG(tooltip)
+        self.pri_icon.setText(
+            QCoreApplication.translate("MainWindow", u"A", None))
+        self.pri_label.setText(
+            QCoreApplication.translate("MainWindow", u"\u4f18\u5148\u7ea7",
+                                       None))
+        #if QT_CONFIG(tooltip)
+        self.pri_box.setToolTip(
+            QCoreApplication.translate(
+                "MainWindow",
+                u"<html><head/><body><p>\u4f18\u5148\u7ea7 <span style=\" font-weight:600; color:#ff0000;\">\u5fc5\u586b</span></p></body></html>",
+                None))
+        #endif // QT_CONFIG(tooltip)
+        self.version_icon.setText(
+            QCoreApplication.translate("MainWindow", u"A", None))
+        self.assigned_label.setText(
+            QCoreApplication.translate("MainWindow", u"\u6307\u6d3e\u7ed9",
+                                       None))
+        self.os_icon.setText(
+            QCoreApplication.translate("MainWindow", u"A", None))
+        self.os_label.setText(
+            QCoreApplication.translate("MainWindow",
+                                       u"\u64cd\u4f5c\u7cfb\u7edf", None))
+        #if QT_CONFIG(tooltip)
+        self.os_box.setToolTip(
+            QCoreApplication.translate(
+                "MainWindow", u"\u64cd\u4f5c\u7cfb\u7edf \u9009\u586b", None))
+        #endif // QT_CONFIG(tooltip)
+        self.browser_icon.setText(
+            QCoreApplication.translate("MainWindow", u"A", None))
+        self.browser_label.setText(
+            QCoreApplication.translate("MainWindow", u"\u6d4f\u89c8\u5668",
+                                       None))
+        #if QT_CONFIG(tooltip)
+        self.browser_box.setToolTip(
+            QCoreApplication.translate("MainWindow",
+                                       u"\u6d4f\u89c8\u5668 \u9009\u586b",
+                                       None))
+        #endif // QT_CONFIG(tooltip)
+        self.draft_icon.setText(
+            QCoreApplication.translate("MainWindow", u"A", None))
+        self.draft_label.setText(
+            QCoreApplication.translate("MainWindow", u"\u8349\u7a3f\u7bb1",
+                                       None))
+        #if QT_CONFIG(tooltip)
+        self.draft_box.setToolTip(
+            QCoreApplication.translate(
+                "MainWindow",
+                u"\u8349\u7a3f\u7bb1 \u9009\u62e9\u4fdd\u5b58\u7684\u8349\u7a3f\u7ee7\u7eed\u7f16\u8f91",
+                None))
+        #endif // QT_CONFIG(tooltip)
+        self.template_icon.setText(
+            QCoreApplication.translate("MainWindow", u"A", None))
+        self.template_label.setText(
+            QCoreApplication.translate("MainWindow",
+                                       u"\u9009\u62e9\u6a21\u677f", None))
+        #if QT_CONFIG(tooltip)
+        self.template_box.setToolTip(
+            QCoreApplication.translate(
+                "MainWindow",
+                u"\u9009\u62e9\u6a21\u677f \u590d\u7528\u6a21\u677f\u5feb\u901f\u7f16\u8f91",
+                None))
+        #endif // QT_CONFIG(tooltip)
+        #if QT_CONFIG(tooltip)
+        self.assigned_box.setToolTip(
+            QCoreApplication.translate(
+                "MainWindow",
+                u"<html><head/><body><p>\u6307\u6d3e\u7ed9 <span style=\" font-weight:600; color:#ff0000;\">\u5fc5\u586b</span></p></body></html>",
+                None))
+        #endif // QT_CONFIG(tooltip)
+        self.title_icon.setText(
+            QCoreApplication.translate("MainWindow", u"A", None))
+        self.title_label.setText(
+            QCoreApplication.translate("MainWindow", u"\u6807\u9898", None))
+        #if QT_CONFIG(tooltip)
+        self.title_edit.setToolTip(
+            QCoreApplication.translate(
+                "MainWindow",
+                u"<html><head/><body><p>\u6807\u9898 <span style=\" font-weight:600; color:#ff0000;\">\u5fc5\u586b</span></p></body></html>",
+                None))
+        #endif // QT_CONFIG(tooltip)
+        self.title_edit.setText("")
+        self.title_edit.setPlaceholderText(
+            QCoreApplication.translate(
+                "MainWindow", u"\u6807\u9898\u4e0d\u80fd\u4e3a\u7a7a", None))
+        self.keywords_icon.setText(
+            QCoreApplication.translate("MainWindow", u"A", None))
+        self.keywords_label.setText(
+            QCoreApplication.translate("MainWindow", u"\u5173\u952e\u8bcd",
+                                       None))
+        #if QT_CONFIG(tooltip)
+        self.keywords_edit.setToolTip(
+            QCoreApplication.translate("MainWindow",
+                                       u"\u5173\u952e\u8bcd \u9009\u586b",
+                                       None))
+        #endif // QT_CONFIG(tooltip)
+        self.keywords_edit.setPlaceholderText(
+            QCoreApplication.translate(
+                "MainWindow",
+                u"\u591a\u4e2a\u5173\u952e\u8bcd\u7528;\u9694\u5f00", None))
+        #if QT_CONFIG(tooltip)
+        self.main_edit.setToolTip(
+            QCoreApplication.translate(
+                "MainWindow",
+                u"<html><head/><body><p>\u4e3b\u8981\u5185\u5bb9 \u63cf\u8ff0\u590d\u73b0\u6b65\u9aa4 \u5b9a\u4f4d\u601d\u8def <span style=\" font-weight:600; color:#ff0000;\">\u5fc5\u586b</span></p></body></html>",
+                None))
+        #endif // QT_CONFIG(tooltip)
+        #if QT_CONFIG(tooltip)
+        self.save_to_draft_btn.setToolTip(
+            QCoreApplication.translate(
+                "MainWindow",
+                u"\u5c06\u5f53\u524d\u7f16\u8f91\u5185\u5bb9\u4fdd\u5b58\u4e3a\u8349\u7a3f",
+                None))
+        #endif // QT_CONFIG(tooltip)
+        self.save_to_draft_btn.setText(
+            QCoreApplication.translate("MainWindow",
+                                       u"\u4fdd\u5b58\u4e3a\u8349\u7a3f",
+                                       None))
+        self.commit_btn.setText(
+            QCoreApplication.translate("MainWindow", u"\u63d0\u4ea4", None))
+        #if QT_CONFIG(tooltip)
+        self.mailto_edit.setToolTip(
+            QCoreApplication.translate("MainWindow",
+                                       u"\u6284\u9001 \u9009\u586b", None))
+        #endif // QT_CONFIG(tooltip)
+        self.mailto_edit.setPlaceholderText(
+            QCoreApplication.translate(
+                "MainWindow",
+                u"\u6284\u9001,\u591a\u4e2a\u90ae\u7bb1\u7528;\u9694\u5f00",
+                None))
+        #if QT_CONFIG(tooltip)
+        self.save_to_template_btn.setToolTip(
+            QCoreApplication.translate(
+                "MainWindow",
+                u"\u5c06\u5f53\u524d\u5185\u5bb9\u4f5c\u4e3a\u6a21\u677f\u4fdd\u5b58",
+                None))
+        #endif // QT_CONFIG(tooltip)
+        self.save_to_template_btn.setText(
+            QCoreApplication.translate("MainWindow",
+                                       u"\u4fdd\u5b58\u4e3a\u6a21\u677f",
+                                       None))
+        self.mailto_icon.setText(
+            QCoreApplication.translate("MainWindow", u"A", None))
 
+    # retranslateUi

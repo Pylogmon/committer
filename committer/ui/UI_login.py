@@ -14,17 +14,20 @@ from PySide2.QtWidgets import *
 
 
 class Ui_Login(object):
+
     def setupUi(self, Login):
         if not Login.objectName():
             Login.setObjectName(u"Login")
         Login.resize(400, 250)
         self.gridLayout_2 = QGridLayout(Login)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.up = QSpacerItem(20, 46, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.up = QSpacerItem(20, 46, QSizePolicy.Minimum,
+                              QSizePolicy.Expanding)
 
         self.gridLayout_2.addItem(self.up, 0, 1, 1, 1)
 
-        self.left = QSpacerItem(72, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.left = QSpacerItem(72, 20, QSizePolicy.Expanding,
+                                QSizePolicy.Minimum)
 
         self.gridLayout_2.addItem(self.left, 1, 0, 1, 1)
 
@@ -69,34 +72,45 @@ class Ui_Login(object):
 
         self.gridLayout.addWidget(self.password_icon, 2, 0, 1, 1)
 
-
         self.gridLayout_2.addLayout(self.gridLayout, 1, 1, 1, 1)
 
-        self.right = QSpacerItem(72, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.right = QSpacerItem(72, 20, QSizePolicy.Expanding,
+                                 QSizePolicy.Minimum)
 
         self.gridLayout_2.addItem(self.right, 1, 2, 1, 1)
 
-        self.down = QSpacerItem(20, 46, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.down = QSpacerItem(20, 46, QSizePolicy.Minimum,
+                                QSizePolicy.Expanding)
 
         self.gridLayout_2.addItem(self.down, 2, 1, 1, 1)
-
 
         self.retranslateUi(Login)
 
         QMetaObject.connectSlotsByName(Login)
+
     # setupUi
 
     def retranslateUi(self, Login):
-        Login.setWindowTitle(QCoreApplication.translate("Login", u"Form", None))
-        self.user_name_edit.setText(QCoreApplication.translate("Login", u"LiMin", None))
-        self.user_name_edit.setPlaceholderText(QCoreApplication.translate("Login", u"UserName", None))
-        self.server_icon.setText(QCoreApplication.translate("Login", u"A", None))
-        self.server_edit.setText(QCoreApplication.translate("Login", u"http://127.0.0.1:9000", None))
-        self.server_edit.setPlaceholderText(QCoreApplication.translate("Login", u"Server address", None))
-        self.password_edit.setText(QCoreApplication.translate("Login", u"666666", None))
-        self.password_edit.setPlaceholderText(QCoreApplication.translate("Login", u"Password", None))
-        self.login_btn.setText(QCoreApplication.translate("Login", u"Login", None))
-        self.user_name_icon.setText(QCoreApplication.translate("Login", u"A", None))
-        self.password_icon.setText(QCoreApplication.translate("Login", u"A", None))
-    # retranslateUi
+        Login.setWindowTitle(QCoreApplication.translate(
+            "Login", u"Form", None))
+        self.user_name_edit.setText("")
+        self.user_name_edit.setPlaceholderText(
+            QCoreApplication.translate("Login", u"\u7528\u6237\u540d", None))
+        self.server_icon.setText(
+            QCoreApplication.translate("Login", u"A", None))
+        self.server_edit.setText("")
+        self.server_edit.setPlaceholderText(
+            QCoreApplication.translate("Login",
+                                       u"\u670d\u52a1\u5668\u5730\u5740",
+                                       None))
+        self.password_edit.setText("")
+        self.password_edit.setPlaceholderText(
+            QCoreApplication.translate("Login", u"\u5bc6\u7801", None))
+        self.login_btn.setText(
+            QCoreApplication.translate("Login", u"\u767b\u5f55", None))
+        self.user_name_icon.setText(
+            QCoreApplication.translate("Login", u"A", None))
+        self.password_icon.setText(
+            QCoreApplication.translate("Login", u"A", None))
 
+    # retranslateUi

@@ -9,7 +9,7 @@ server = flask.Flask(__name__)
 # 装饰器，将login()函数变为一个接口 127.0.0.1:9000/login
 @server.route('/login', methods=['post'])
 def login():
-    username = flask.request.args.get("username")
+    username = flask.request.args.get("user_name")
     password = flask.request.args.get("password")
     status = None
     message = None
@@ -21,7 +21,6 @@ def login():
     cursor.execute('select password from User where user_name=?', (username, ))
     # 获得查询结果集:
     values = cursor.fetchall()
-    print(values)
     if len(values) == 0:
         status = "Fail"
         message = "User does not exist"

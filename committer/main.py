@@ -23,6 +23,7 @@ class Committer(object):
     def run(self):
         self.login()
 
+    @Slot()
     def login(self):
         self.login_page = Login()
         self.login_page.login_success.connect(self.start)
@@ -31,6 +32,7 @@ class Committer(object):
     def start(self, username):
         self.main_window = MainWindow(username)
         self.main_window.show()
+        self.main_window.logout_success.connect(self.login)
 
 
 if __name__ == "__main__":
