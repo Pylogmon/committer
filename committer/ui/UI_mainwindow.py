@@ -23,35 +23,35 @@ class Ui_MainWindow(object):
         self.gridLayout_5.setObjectName(u"gridLayout_5")
         self.gridLayout_2 = QGridLayout()
         self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.assigned_me_btn = QPushButton(MainWindow)
-        self.assigned_me_btn.setObjectName(u"assigned_me_btn")
-
-        self.gridLayout_2.addWidget(self.assigned_me_btn, 0, 1, 1, 1)
-
         self.my_commit_btn = QPushButton(MainWindow)
         self.my_commit_btn.setObjectName(u"my_commit_btn")
 
         self.gridLayout_2.addWidget(self.my_commit_btn, 0, 0, 1, 1)
 
-        self.user_name_icon = QLabel(MainWindow)
-        self.user_name_icon.setObjectName(u"user_name_icon")
+        self.assigned_me_btn = QPushButton(MainWindow)
+        self.assigned_me_btn.setObjectName(u"assigned_me_btn")
 
-        self.gridLayout_2.addWidget(self.user_name_icon, 0, 4, 1, 1)
-
-        self.logout_btn = QPushButton(MainWindow)
-        self.logout_btn.setObjectName(u"logout_btn")
-
-        self.gridLayout_2.addWidget(self.logout_btn, 0, 6, 1, 1)
+        self.gridLayout_2.addWidget(self.assigned_me_btn, 0, 1, 1, 1)
 
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding,
                                             QSizePolicy.Minimum)
 
         self.gridLayout_2.addItem(self.horizontalSpacer, 0, 2, 1, 1)
 
+        self.user_name_icon = QLabel(MainWindow)
+        self.user_name_icon.setObjectName(u"user_name_icon")
+
+        self.gridLayout_2.addWidget(self.user_name_icon, 0, 3, 1, 1)
+
         self.user_name_label = QLabel(MainWindow)
         self.user_name_label.setObjectName(u"user_name_label")
 
-        self.gridLayout_2.addWidget(self.user_name_label, 0, 5, 1, 1)
+        self.gridLayout_2.addWidget(self.user_name_label, 0, 4, 1, 1)
+
+        self.logout_btn = QPushButton(MainWindow)
+        self.logout_btn.setObjectName(u"logout_btn")
+
+        self.gridLayout_2.addWidget(self.logout_btn, 0, 5, 1, 1)
 
         self.gridLayout_5.addLayout(self.gridLayout_2, 0, 0, 1, 1)
 
@@ -197,6 +197,11 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.assigned_label, 1, 10, 1, 1)
 
+        self.assigned_box = QComboBox(MainWindow)
+        self.assigned_box.setObjectName(u"assigned_box")
+
+        self.gridLayout.addWidget(self.assigned_box, 1, 11, 1, 1)
+
         self.os_icon = QLabel(MainWindow)
         self.os_icon.setObjectName(u"os_icon")
 
@@ -269,11 +274,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.template_box, 2, 11, 1, 1)
 
-        self.assigned_box = QComboBox(MainWindow)
-        self.assigned_box.setObjectName(u"assigned_box")
-
-        self.gridLayout.addWidget(self.assigned_box, 1, 11, 1, 1)
-
         self.gridLayout_5.addLayout(self.gridLayout, 1, 0, 1, 1)
 
         self.gridLayout_3 = QGridLayout()
@@ -317,30 +317,30 @@ class Ui_MainWindow(object):
 
         self.gridLayout_4 = QGridLayout()
         self.gridLayout_4.setObjectName(u"gridLayout_4")
-        self.save_to_draft_btn = QPushButton(MainWindow)
-        self.save_to_draft_btn.setObjectName(u"save_to_draft_btn")
+        self.mailto_icon = QLabel(MainWindow)
+        self.mailto_icon.setObjectName(u"mailto_icon")
 
-        self.gridLayout_4.addWidget(self.save_to_draft_btn, 0, 2, 1, 1)
-
-        self.commit_btn = QPushButton(MainWindow)
-        self.commit_btn.setObjectName(u"commit_btn")
-
-        self.gridLayout_4.addWidget(self.commit_btn, 0, 4, 1, 1)
+        self.gridLayout_4.addWidget(self.mailto_icon, 0, 0, 1, 1)
 
         self.mailto_edit = QLineEdit(MainWindow)
         self.mailto_edit.setObjectName(u"mailto_edit")
 
         self.gridLayout_4.addWidget(self.mailto_edit, 0, 1, 1, 1)
 
+        self.save_to_draft_btn = QPushButton(MainWindow)
+        self.save_to_draft_btn.setObjectName(u"save_to_draft_btn")
+
+        self.gridLayout_4.addWidget(self.save_to_draft_btn, 0, 2, 1, 1)
+
         self.save_to_template_btn = QPushButton(MainWindow)
         self.save_to_template_btn.setObjectName(u"save_to_template_btn")
 
         self.gridLayout_4.addWidget(self.save_to_template_btn, 0, 3, 1, 1)
 
-        self.mailto_icon = QLabel(MainWindow)
-        self.mailto_icon.setObjectName(u"mailto_icon")
+        self.commit_btn = QPushButton(MainWindow)
+        self.commit_btn.setObjectName(u"commit_btn")
 
-        self.gridLayout_4.addWidget(self.mailto_icon, 0, 0, 1, 1)
+        self.gridLayout_4.addWidget(self.commit_btn, 0, 4, 1, 1)
 
         self.gridLayout_5.addLayout(self.gridLayout_4, 4, 0, 1, 1)
 
@@ -354,16 +354,6 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(
             QCoreApplication.translate("MainWindow", u"Form", None))
         #if QT_CONFIG(tooltip)
-        self.assigned_me_btn.setToolTip(
-            QCoreApplication.translate(
-                "MainWindow",
-                u"\u5f85\u5904\u7406 \u67e5\u770b\u6307\u6d3e\u7ed9\u6211\u7684\u5de5\u5355",
-                None))
-        #endif // QT_CONFIG(tooltip)
-        self.assigned_me_btn.setText(
-            QCoreApplication.translate("MainWindow", u"\u5f85\u5904\u7406",
-                                       None))
-        #if QT_CONFIG(tooltip)
         self.my_commit_btn.setToolTip(
             QCoreApplication.translate(
                 "MainWindow",
@@ -373,13 +363,23 @@ class Ui_MainWindow(object):
         self.my_commit_btn.setText(
             QCoreApplication.translate("MainWindow",
                                        u"\u6211\u7684\u63d0\u4ea4", None))
+        #if QT_CONFIG(tooltip)
+        self.assigned_me_btn.setToolTip(
+            QCoreApplication.translate(
+                "MainWindow",
+                u"\u5f85\u5904\u7406 \u67e5\u770b\u6307\u6d3e\u7ed9\u6211\u7684\u5de5\u5355",
+                None))
+        #endif // QT_CONFIG(tooltip)
+        self.assigned_me_btn.setText(
+            QCoreApplication.translate("MainWindow", u"\u5f85\u5904\u7406",
+                                       None))
         self.user_name_icon.setText(
             QCoreApplication.translate("MainWindow", u"A", None))
+        self.user_name_label.setText(
+            QCoreApplication.translate("MainWindow", u"Username", None))
         self.logout_btn.setText(
             QCoreApplication.translate("MainWindow",
                                        u"\u9000\u51fa\u767b\u5f55", None))
-        self.user_name_label.setText(
-            QCoreApplication.translate("MainWindow", u"Username", None))
         self.product_icon.setText(
             QCoreApplication.translate("MainWindow", u"A", None))
         self.product_label.setText(
@@ -465,6 +465,13 @@ class Ui_MainWindow(object):
         self.assigned_label.setText(
             QCoreApplication.translate("MainWindow", u"\u6307\u6d3e\u7ed9",
                                        None))
+        #if QT_CONFIG(tooltip)
+        self.assigned_box.setToolTip(
+            QCoreApplication.translate(
+                "MainWindow",
+                u"<html><head/><body><p>\u6307\u6d3e\u7ed9 <span style=\" font-weight:600; color:#ff0000;\">\u5fc5\u586b</span></p></body></html>",
+                None))
+        #endif // QT_CONFIG(tooltip)
         self.os_icon.setText(
             QCoreApplication.translate("MainWindow", u"A", None))
         self.os_label.setText(
@@ -510,13 +517,6 @@ class Ui_MainWindow(object):
                 u"\u9009\u62e9\u6a21\u677f \u590d\u7528\u6a21\u677f\u5feb\u901f\u7f16\u8f91",
                 None))
         #endif // QT_CONFIG(tooltip)
-        #if QT_CONFIG(tooltip)
-        self.assigned_box.setToolTip(
-            QCoreApplication.translate(
-                "MainWindow",
-                u"<html><head/><body><p>\u6307\u6d3e\u7ed9 <span style=\" font-weight:600; color:#ff0000;\">\u5fc5\u586b</span></p></body></html>",
-                None))
-        #endif // QT_CONFIG(tooltip)
         self.title_icon.setText(
             QCoreApplication.translate("MainWindow", u"A", None))
         self.title_label.setText(
@@ -554,19 +554,8 @@ class Ui_MainWindow(object):
                 u"<html><head/><body><p>\u4e3b\u8981\u5185\u5bb9 \u63cf\u8ff0\u590d\u73b0\u6b65\u9aa4 \u5b9a\u4f4d\u601d\u8def <span style=\" font-weight:600; color:#ff0000;\">\u5fc5\u586b</span></p></body></html>",
                 None))
         #endif // QT_CONFIG(tooltip)
-        #if QT_CONFIG(tooltip)
-        self.save_to_draft_btn.setToolTip(
-            QCoreApplication.translate(
-                "MainWindow",
-                u"\u5c06\u5f53\u524d\u7f16\u8f91\u5185\u5bb9\u4fdd\u5b58\u4e3a\u8349\u7a3f",
-                None))
-        #endif // QT_CONFIG(tooltip)
-        self.save_to_draft_btn.setText(
-            QCoreApplication.translate("MainWindow",
-                                       u"\u4fdd\u5b58\u4e3a\u8349\u7a3f",
-                                       None))
-        self.commit_btn.setText(
-            QCoreApplication.translate("MainWindow", u"\u63d0\u4ea4", None))
+        self.mailto_icon.setText(
+            QCoreApplication.translate("MainWindow", u"A", None))
         #if QT_CONFIG(tooltip)
         self.mailto_edit.setToolTip(
             QCoreApplication.translate("MainWindow",
@@ -578,6 +567,17 @@ class Ui_MainWindow(object):
                 u"\u6284\u9001,\u591a\u4e2a\u90ae\u7bb1\u7528;\u9694\u5f00",
                 None))
         #if QT_CONFIG(tooltip)
+        self.save_to_draft_btn.setToolTip(
+            QCoreApplication.translate(
+                "MainWindow",
+                u"\u5c06\u5f53\u524d\u7f16\u8f91\u5185\u5bb9\u4fdd\u5b58\u4e3a\u8349\u7a3f",
+                None))
+        #endif // QT_CONFIG(tooltip)
+        self.save_to_draft_btn.setText(
+            QCoreApplication.translate("MainWindow",
+                                       u"\u4fdd\u5b58\u4e3a\u8349\u7a3f",
+                                       None))
+        #if QT_CONFIG(tooltip)
         self.save_to_template_btn.setToolTip(
             QCoreApplication.translate(
                 "MainWindow",
@@ -588,7 +588,7 @@ class Ui_MainWindow(object):
             QCoreApplication.translate("MainWindow",
                                        u"\u4fdd\u5b58\u4e3a\u6a21\u677f",
                                        None))
-        self.mailto_icon.setText(
-            QCoreApplication.translate("MainWindow", u"A", None))
+        self.commit_btn.setText(
+            QCoreApplication.translate("MainWindow", u"\u63d0\u4ea4", None))
 
     # retranslateUi

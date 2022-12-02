@@ -27,7 +27,7 @@
      </property>
     </spacer>
    </item>
-   <item row="1" column="0">
+   <item row="1" column="0" rowspan="2">
     <spacer name="left">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -42,22 +42,6 @@
    </item>
    <item row="1" column="1">
     <layout class="QGridLayout" name="gridLayout">
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="user_name_edit">
-       <property name="minimumSize">
-        <size>
-         <width>250</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="placeholderText">
-        <string>用户名</string>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="0">
       <widget class="QLabel" name="server_icon">
        <property name="text">
@@ -81,6 +65,36 @@
        </property>
       </widget>
      </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="user_name_icon">
+       <property name="text">
+        <string>A</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="user_name_edit">
+       <property name="minimumSize">
+        <size>
+         <width>250</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="placeholderText">
+        <string>用户名</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="password_icon">
+       <property name="text">
+        <string>A</string>
+       </property>
+      </widget>
+     </item>
      <item row="2" column="1">
       <widget class="QLineEdit" name="password_edit">
        <property name="minimumSize">
@@ -100,30 +114,9 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="0" colspan="2">
-      <widget class="QPushButton" name="login_btn">
-       <property name="text">
-        <string>登录</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="user_name_icon">
-       <property name="text">
-        <string>A</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="password_icon">
-       <property name="text">
-        <string>A</string>
-       </property>
-      </widget>
-     </item>
     </layout>
    </item>
-   <item row="1" column="2">
+   <item row="1" column="2" rowspan="2">
     <spacer name="right">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -137,6 +130,13 @@
     </spacer>
    </item>
    <item row="2" column="1">
+    <widget class="QPushButton" name="login_btn">
+     <property name="text">
+      <string>登录</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
     <spacer name="down">
      <property name="orientation">
       <enum>Qt::Vertical</enum>

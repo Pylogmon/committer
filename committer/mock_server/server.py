@@ -37,6 +37,28 @@ def login():
     return res
 
 
+@server.route('/get_user', methods=['get'])
+def get_user():
+    path = split(realpath(__file__))[0]
+
+    conn = sqlite3.connect(join(path, 'test.db'))
+    cursor = conn.cursor()
+    # 执行查询语句:
+    cursor.execute('select * from User')
+    # 获得查询结果集:
+    values = cursor.fetchall()
+    user_list = {"status": "Success", "data": []}
+    if len(values) == 0:
+        user_list["status"] = "Fail"
+    else:
+        for i in values:
+            user_list["data"].append({"user_id": i[0], "user_name": i[1]})
+    cursor.close()
+    conn.close()
+    res = json.dumps(user_list)
+    return res
+
+
 # 启动服务，debug=True表示修改代码后自动重启；
 # 启动服务后接口才能访问，端口号为9000，默认ip地址为127.0.0.1
 server.run(port=9000, debug=True)

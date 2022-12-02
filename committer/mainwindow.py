@@ -5,6 +5,7 @@ from PySide2.QtGui import QIcon, QPixmap
 from committer.resource import rc_icons
 from PySide2.QtWidgets import QWidget
 from PySide2.QtCore import Signal
+import requests
 import json
 import os
 
@@ -13,9 +14,10 @@ class MainWindow(QWidget, Ui_MainWindow):
 
     logout_success = Signal()
 
-    def __init__(self, username):
+    def __init__(self, login_info):
         super(MainWindow, self).__init__()
-        self.user_name = username
+        self.login_info = login_info
+        self.user_list = None
         self.setupUi(self)
         self.init_ui()
         self.init_connect()
@@ -64,7 +66,7 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.mailto_icon.setPixmap(QPixmap(":/icons/mailto.svg"))
 
     def set_other_ui(self):
-        self.user_name_label.setText(self.user_name)
+        self.user_name_label.setText(self.login_info["user_name"])
         self.setWindowTitle("Committer")
 
     def set_boxes(self):
@@ -117,7 +119,7 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.template_box.setCurrentText("None")
 
     def set_remote_box(self):
-        pass
+        self.set_user_list()
 
     def build_json(self):
         data = {'meta': {}, "auth": {}}
@@ -125,11 +127,25 @@ class MainWindow(QWidget, Ui_MainWindow):
 
     def logout(self):
         login_file = StandardPath.login_file()
-        with open(login_file, 'r', encoding='utf-8') as f:
-            login_info = json.load(f)
-        login_info["user_name"] = ""
-        login_info["password"] = ""
+        self.login_info["user_name"] = ""
+        self.login_info["password"] = ""
         with open(login_file, 'w', encoding='utf-8') as f:
-            json.dump(login_info, f)
+            json.dump(self.login_info, f)
         self.logout_success.emit()
         self.close()
+
+    def set_user_list(self):
+        try:
+            req = requests.get(self.login_info["server"] + "/get_user",
+                               timeout=5)
+            status = json.loads(req.text)["status"]
+            self.user_list = json.loads(req.text)["data"]
+            if status == "Success":
+                for i in self.user_list:
+                    self.assigned_box.addItem(i["user_name"])
+            else:
+                self.warning("Get User Fail", "")
+        except ConnectionError as e:
+            self.warning("ConnectionError", str(e))
+        except TimeoutError as e:
+            self.warning("TimeoutError", str(e))

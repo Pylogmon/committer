@@ -28,9 +28,9 @@ class Committer(object):
         self.login_page = Login()
         self.login_page.login_success.connect(self.start)
 
-    @Slot(str)
-    def start(self, username):
-        self.main_window = MainWindow(username)
+    @Slot(dict)
+    def start(self, login_info):
+        self.main_window = MainWindow(login_info)
         self.main_window.show()
         self.main_window.logout_success.connect(self.login)
 

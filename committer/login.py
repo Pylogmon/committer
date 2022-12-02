@@ -15,7 +15,7 @@ import os
 
 class Login(QWidget, Ui_Login):
 
-    login_success = Signal(str)
+    login_success = Signal(dict)
 
     def __init__(self):
         super(Login, self).__init__()
@@ -76,7 +76,7 @@ class Login(QWidget, Ui_Login):
         with open(self.login_file, 'w', encoding='utf-8') as f:
             json.dump(self.login_info, f)
         # 发射登陆成功信号
-        self.login_success.emit(self.login_info["user_name"])
+        self.login_success.emit(self.login_info)
         self.close()
 
     # 从界面获取输入数据

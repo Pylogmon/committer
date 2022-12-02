@@ -29,16 +29,10 @@ class Ui_Login(object):
         self.left = QSpacerItem(72, 20, QSizePolicy.Expanding,
                                 QSizePolicy.Minimum)
 
-        self.gridLayout_2.addItem(self.left, 1, 0, 1, 1)
+        self.gridLayout_2.addItem(self.left, 1, 0, 2, 1)
 
         self.gridLayout = QGridLayout()
         self.gridLayout.setObjectName(u"gridLayout")
-        self.user_name_edit = QLineEdit(Login)
-        self.user_name_edit.setObjectName(u"user_name_edit")
-        self.user_name_edit.setMinimumSize(QSize(250, 0))
-
-        self.gridLayout.addWidget(self.user_name_edit, 1, 1, 1, 1)
-
         self.server_icon = QLabel(Login)
         self.server_icon.setObjectName(u"server_icon")
 
@@ -50,6 +44,22 @@ class Ui_Login(object):
 
         self.gridLayout.addWidget(self.server_edit, 0, 1, 1, 1)
 
+        self.user_name_icon = QLabel(Login)
+        self.user_name_icon.setObjectName(u"user_name_icon")
+
+        self.gridLayout.addWidget(self.user_name_icon, 1, 0, 1, 1)
+
+        self.user_name_edit = QLineEdit(Login)
+        self.user_name_edit.setObjectName(u"user_name_edit")
+        self.user_name_edit.setMinimumSize(QSize(250, 0))
+
+        self.gridLayout.addWidget(self.user_name_edit, 1, 1, 1, 1)
+
+        self.password_icon = QLabel(Login)
+        self.password_icon.setObjectName(u"password_icon")
+
+        self.gridLayout.addWidget(self.password_icon, 2, 0, 1, 1)
+
         self.password_edit = QLineEdit(Login)
         self.password_edit.setObjectName(u"password_edit")
         self.password_edit.setMinimumSize(QSize(250, 0))
@@ -57,32 +67,22 @@ class Ui_Login(object):
 
         self.gridLayout.addWidget(self.password_edit, 2, 1, 1, 1)
 
-        self.login_btn = QPushButton(Login)
-        self.login_btn.setObjectName(u"login_btn")
-
-        self.gridLayout.addWidget(self.login_btn, 3, 0, 1, 2)
-
-        self.user_name_icon = QLabel(Login)
-        self.user_name_icon.setObjectName(u"user_name_icon")
-
-        self.gridLayout.addWidget(self.user_name_icon, 1, 0, 1, 1)
-
-        self.password_icon = QLabel(Login)
-        self.password_icon.setObjectName(u"password_icon")
-
-        self.gridLayout.addWidget(self.password_icon, 2, 0, 1, 1)
-
         self.gridLayout_2.addLayout(self.gridLayout, 1, 1, 1, 1)
 
         self.right = QSpacerItem(72, 20, QSizePolicy.Expanding,
                                  QSizePolicy.Minimum)
 
-        self.gridLayout_2.addItem(self.right, 1, 2, 1, 1)
+        self.gridLayout_2.addItem(self.right, 1, 2, 2, 1)
+
+        self.login_btn = QPushButton(Login)
+        self.login_btn.setObjectName(u"login_btn")
+
+        self.gridLayout_2.addWidget(self.login_btn, 2, 1, 1, 1)
 
         self.down = QSpacerItem(20, 46, QSizePolicy.Minimum,
                                 QSizePolicy.Expanding)
 
-        self.gridLayout_2.addItem(self.down, 2, 1, 1, 1)
+        self.gridLayout_2.addItem(self.down, 3, 1, 1, 1)
 
         self.retranslateUi(Login)
 
@@ -93,9 +93,6 @@ class Ui_Login(object):
     def retranslateUi(self, Login):
         Login.setWindowTitle(QCoreApplication.translate(
             "Login", u"Form", None))
-        self.user_name_edit.setText("")
-        self.user_name_edit.setPlaceholderText(
-            QCoreApplication.translate("Login", u"\u7528\u6237\u540d", None))
         self.server_icon.setText(
             QCoreApplication.translate("Login", u"A", None))
         self.server_edit.setText("")
@@ -103,14 +100,17 @@ class Ui_Login(object):
             QCoreApplication.translate("Login",
                                        u"\u670d\u52a1\u5668\u5730\u5740",
                                        None))
+        self.user_name_icon.setText(
+            QCoreApplication.translate("Login", u"A", None))
+        self.user_name_edit.setText("")
+        self.user_name_edit.setPlaceholderText(
+            QCoreApplication.translate("Login", u"\u7528\u6237\u540d", None))
+        self.password_icon.setText(
+            QCoreApplication.translate("Login", u"A", None))
         self.password_edit.setText("")
         self.password_edit.setPlaceholderText(
             QCoreApplication.translate("Login", u"\u5bc6\u7801", None))
         self.login_btn.setText(
             QCoreApplication.translate("Login", u"\u767b\u5f55", None))
-        self.user_name_icon.setText(
-            QCoreApplication.translate("Login", u"A", None))
-        self.password_icon.setText(
-            QCoreApplication.translate("Login", u"A", None))
 
     # retranslateUi

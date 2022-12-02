@@ -16,16 +16,6 @@
   <layout class="QGridLayout" name="gridLayout_5">
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout_2">
-     <item row="0" column="1">
-      <widget class="QPushButton" name="assigned_me_btn">
-       <property name="toolTip">
-        <string>待处理 查看指派给我的工单</string>
-       </property>
-       <property name="text">
-        <string>待处理</string>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="0">
       <widget class="QPushButton" name="my_commit_btn">
        <property name="toolTip">
@@ -36,17 +26,13 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="4">
-      <widget class="QLabel" name="user_name_icon">
-       <property name="text">
-        <string>A</string>
+     <item row="0" column="1">
+      <widget class="QPushButton" name="assigned_me_btn">
+       <property name="toolTip">
+        <string>待处理 查看指派给我的工单</string>
        </property>
-      </widget>
-     </item>
-     <item row="0" column="6">
-      <widget class="QPushButton" name="logout_btn">
        <property name="text">
-        <string>退出登录</string>
+        <string>待处理</string>
        </property>
       </widget>
      </item>
@@ -63,10 +49,24 @@
        </property>
       </spacer>
      </item>
-     <item row="0" column="5">
+     <item row="0" column="3">
+      <widget class="QLabel" name="user_name_icon">
+       <property name="text">
+        <string>A</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="4">
       <widget class="QLabel" name="user_name_label">
        <property name="text">
         <string>Username</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="5">
+      <widget class="QPushButton" name="logout_btn">
+       <property name="text">
+        <string>退出登录</string>
        </property>
       </widget>
      </item>
@@ -283,6 +283,13 @@
        </property>
       </widget>
      </item>
+     <item row="1" column="11">
+      <widget class="QComboBox" name="assigned_box">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;指派给 &lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;必填&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </item>
      <item row="2" column="0">
       <widget class="QLabel" name="os_icon">
        <property name="text">
@@ -391,13 +398,6 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="11">
-      <widget class="QComboBox" name="assigned_box">
-       <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;指派给 &lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;必填&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-     </item>
     </layout>
    </item>
    <item row="2" column="0">
@@ -464,20 +464,10 @@
    </item>
    <item row="4" column="0">
     <layout class="QGridLayout" name="gridLayout_4">
-     <item row="0" column="2">
-      <widget class="QPushButton" name="save_to_draft_btn">
-       <property name="toolTip">
-        <string>将当前编辑内容保存为草稿</string>
-       </property>
+     <item row="0" column="0">
+      <widget class="QLabel" name="mailto_icon">
        <property name="text">
-        <string>保存为草稿</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="4">
-      <widget class="QPushButton" name="commit_btn">
-       <property name="text">
-        <string>提交</string>
+        <string>A</string>
        </property>
       </widget>
      </item>
@@ -491,6 +481,16 @@
        </property>
       </widget>
      </item>
+     <item row="0" column="2">
+      <widget class="QPushButton" name="save_to_draft_btn">
+       <property name="toolTip">
+        <string>将当前编辑内容保存为草稿</string>
+       </property>
+       <property name="text">
+        <string>保存为草稿</string>
+       </property>
+      </widget>
+     </item>
      <item row="0" column="3">
       <widget class="QPushButton" name="save_to_template_btn">
        <property name="toolTip">
@@ -501,10 +501,10 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="mailto_icon">
+     <item row="0" column="4">
+      <widget class="QPushButton" name="commit_btn">
        <property name="text">
-        <string>A</string>
+        <string>提交</string>
        </property>
       </widget>
      </item>
