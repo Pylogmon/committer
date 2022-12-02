@@ -3,6 +3,7 @@ from PySide2.QtWidgets import QWidget, QMessageBox
 from requests.exceptions import ConnectionError
 from requests.exceptions import MissingSchema
 from requests.exceptions import InvalidSchema
+from committer.utils.uitools import set_size
 from committer.ui.UI_login import Ui_Login
 from PySide2.QtCore import Signal, QTimer
 from PySide2.QtGui import QIcon, QPixmap
@@ -104,10 +105,9 @@ class Login(QWidget, Ui_Login):
     def init_ui(self):
         self.setWindowTitle("Login")
         self.setWindowIcon(QIcon(QPixmap(":/icons/committer.png")))
-        size = self.user_name_icon.height()
-        self.user_name_icon.setPixmap(
-            QPixmap(":/icons/user.svg").scaled(size, size))
-        self.server_icon.setPixmap(
-            QPixmap(":/icons/browser.svg").scaled(size, size))
-        self.password_icon.setPixmap(
-            QPixmap(":/icons/password.svg").scaled(size, size))
+        set_size(self.user_name_icon)
+        set_size(self.server_icon)
+        set_size(self.password_icon)
+        self.user_name_icon.setPixmap(QPixmap(":/icons/user.svg"))
+        self.server_icon.setPixmap(QPixmap(":/icons/browser.svg"))
+        self.password_icon.setPixmap(QPixmap(":/icons/password.svg"))

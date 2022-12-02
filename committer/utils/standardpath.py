@@ -14,6 +14,16 @@ class StandardPath:
         return join(config, 'committer/')
 
     @staticmethod
+    def draft_dir() -> str:
+        config = QStandardPaths.writableLocation(QStandardPaths.ConfigLocation)
+        return join(config, 'committer/drafts/')
+
+    @staticmethod
+    def template_dir() -> str:
+        config = QStandardPaths.writableLocation(QStandardPaths.ConfigLocation)
+        return join(config, 'committer/templates/')
+
+    @staticmethod
     def login_file() -> str:
         config = QStandardPaths.writableLocation(QStandardPaths.ConfigLocation)
         return join(config, 'committer/login.json')
