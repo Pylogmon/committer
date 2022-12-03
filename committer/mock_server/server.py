@@ -59,6 +59,57 @@ def get_user():
     return res
 
 
+@server.route('/get_product', methods=['get'])
+def get_product():
+    path = split(realpath(__file__))[0]
+
+    conn = sqlite3.connect(join(path, 'test.db'))
+    cursor = conn.cursor()
+    # 执行查询语句:
+    cursor.execute('select * from Product')
+    # 获得查询结果集:
+    values = cursor.fetchall()
+    product_list = {"status": "Success", "data": []}
+    if len(values) == 0:
+        product_list["status"] = "Fail"
+    else:
+        for i in values:
+            product_list["data"].append({
+                "product_id": i[0],
+                "product_name": i[1]
+            })
+    cursor.close()
+    conn.close()
+    res = json.dumps(product_list)
+    return res
+
+
+@server.route('/get_project', methods=['get'])
+def get_project():
+    product_id = flask.request.args.get("product_id")
+    path = split(realpath(__file__))[0]
+
+    conn = sqlite3.connect(join(path, 'test.db'))
+    cursor = conn.cursor()
+    # 执行查询语句:
+    cursor.execute('select * from project where product_id=?', (product_id, ))
+    # 获得查询结果集:
+    values = cursor.fetchall()
+    project_list = {"status": "Success", "data": []}
+    if len(values) == 0:
+        project_list["status"] = "Fail"
+    else:
+        for i in values:
+            project_list["data"].append({
+                "project_id": i[0],
+                "project_name": i[2]
+            })
+    cursor.close()
+    conn.close()
+    res = json.dumps(project_list)
+    return res
+
+
 # 启动服务，debug=True表示修改代码后自动重启；
 # 启动服务后接口才能访问，端口号为9000，默认ip地址为127.0.0.1
 server.run(port=9000, debug=True)

@@ -18,17 +18,20 @@ class MainWindow(QWidget, Ui_MainWindow):
         super(MainWindow, self).__init__()
         self.login_info = login_info
         self.user_list = None
+        self.product_list = None
+        self.project_list = None
         self.setupUi(self)
         self.init_ui()
         self.init_connect()
 
     def init_ui(self):
         self.set_icons()
-        self.set_boxes()
         self.set_other_ui()
+        self.set_boxes()
 
     def init_connect(self):
         self.logout_btn.clicked.connect(self.logout)
+        self.product_box.currentIndexChanged.connect(self.set_project_list)
 
     def set_icons(self):
         self.setWindowIcon(QIcon(QPixmap(":/icons/committer.png")))
@@ -68,6 +71,10 @@ class MainWindow(QWidget, Ui_MainWindow):
     def set_other_ui(self):
         self.user_name_label.setText(self.login_info["user_name"])
         self.setWindowTitle("Committer")
+        self.project_box.setEnabled(False)
+        self.module_box.setEnabled(False)
+        self.branch_box.setEnabled(False)
+        self.assigned_box.setEditable(True)
 
     def set_boxes(self):
         self.set_local_box()
@@ -120,6 +127,8 @@ class MainWindow(QWidget, Ui_MainWindow):
 
     def set_remote_box(self):
         self.set_user_list()
+        self.set_product_list()
+        self.set_project_list()
 
     def build_json(self):
         data = {'meta': {}, "auth": {}}
@@ -145,6 +154,46 @@ class MainWindow(QWidget, Ui_MainWindow):
                     self.assigned_box.addItem(i["user_name"])
             else:
                 self.warning("Get User Fail", "")
+        except ConnectionError as e:
+            self.warning("ConnectionError", str(e))
+        except TimeoutError as e:
+            self.warning("TimeoutError", str(e))
+
+    def set_product_list(self):
+        try:
+            req = requests.get(self.login_info["server"] + "/get_product",
+                               timeout=5)
+            status = json.loads(req.text)["status"]
+            self.product_list = json.loads(req.text)["data"]
+            if status == "Success":
+                for i in self.product_list:
+                    self.product_box.addItem(i["product_name"])
+                self.project_box.setCurrentIndex(0)
+            else:
+                self.warning("Get Product Fail", "")
+        except ConnectionError as e:
+            self.warning("ConnectionError", str(e))
+        except TimeoutError as e:
+            self.warning("TimeoutError", str(e))
+
+    def set_project_list(self):
+        try:
+            for i in self.product_list:
+                if i["product_name"] == self.product_box.currentText():
+                    current_product_id = i["product_id"]
+                    break
+            req = requests.get(self.login_info["server"] + "/get_project",
+                               params={"product_id": current_product_id},
+                               timeout=5)
+            status = json.loads(req.text)["status"]
+            self.project_list = json.loads(req.text)["data"]
+            if status == "Success":
+                self.project_box.clear()
+                for i in self.project_list:
+                    self.project_box.addItem(i["project_name"])
+                self.project_box.setEnabled(True)
+            else:
+                self.warning("Get Product Fail", "")
         except ConnectionError as e:
             self.warning("ConnectionError", str(e))
         except TimeoutError as e:
