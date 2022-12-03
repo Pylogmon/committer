@@ -110,6 +110,104 @@ def get_project():
     return res
 
 
+@server.route('/get_module', methods=['get'])
+def get_module():
+    product_id = flask.request.args.get("product_id")
+    project_id = flask.request.args.get("project_id")
+
+    path = split(realpath(__file__))[0]
+
+    conn = sqlite3.connect(join(path, 'test.db'))
+    cursor = conn.cursor()
+    # 执行查询语句:
+    cursor.execute('select * from Module where product_id=? and project_id=?',
+                   (product_id, project_id))
+    # 获得查询结果集:
+    values = cursor.fetchall()
+    module_list = {"status": "Success", "data": []}
+    if len(values) == 0:
+        module_list["status"] = "Fail"
+    else:
+        for i in values:
+            module_list["data"].append({
+                "module_id": i[0],
+                "module_name": i[3]
+            })
+    cursor.close()
+    conn.close()
+    res = json.dumps(module_list)
+    return res
+
+
+@server.route('/get_branch', methods=['get'])
+def get_branch():
+    product_id = flask.request.args.get("product_id")
+    project_id = flask.request.args.get("project_id")
+    module_id = flask.request.args.get("module_id")
+
+    path = split(realpath(__file__))[0]
+
+    conn = sqlite3.connect(join(path, 'test.db'))
+    cursor = conn.cursor()
+    # 执行查询语句:
+    cursor.execute(
+        'select * from Branch where product_id=? and project_id=? and module_id=?',
+        (product_id, project_id, module_id))
+    # 获得查询结果集:
+    values = cursor.fetchall()
+    branch_list = {"status": "Success", "data": []}
+    if len(values) == 0:
+        branch_list["status"] = "Fail"
+    else:
+        for i in values:
+            branch_list["data"].append({
+                "branch_id": i[0],
+                "branch_name": i[4]
+            })
+    cursor.close()
+    conn.close()
+    res = json.dumps(branch_list)
+    return res
+
+
+@server.route('/commit', methods=['post'])
+def commit():
+    path = split(realpath(__file__))[0]
+    conn = sqlite3.connect(join(path, 'test.db'))
+    cursor = conn.cursor()
+    body = flask.request.values.to_dict()
+    cursor.execute('select password from User where user_name=?',
+                   (body["user_name"], ))
+    # 获得查询结果集:
+    values = cursor.fetchall()
+
+    if values[0][0] == body["password"]:
+        body.pop("user_name")
+        body.pop("password")
+        keys = str(tuple(body.keys())).replace("'", "")
+        values = str(tuple(body.values()))
+        sql = f"insert into `Commit` {keys} values {values}"
+        cursor.execute(sql)
+        conn.commit()
+        cursor.execute(
+            "select * from `Commit` order by commit_id desc limit 1")
+        values = cursor.fetchall()
+        data = {"status": "Success", "data": {}, "message": "commit success"}
+        data_list = [
+            'commit_id', 'title', 'product_id', 'project_id', 'module_id',
+            'branch_id', 'keywords', 'type', 'severity', 'pri', 'assigned',
+            'os', 'browser', 'content', 'creator'
+        ]
+        for i in range(len(values[0])):
+            data["data"][data_list[i]] = values[0][i]
+    else:
+        data = {"status": "Fail", "data": {}, "message": "Auth Fail"}
+    cursor.close()
+    conn.close()
+    res = json.dumps(data)
+    return res
+
+
 # 启动服务，debug=True表示修改代码后自动重启；
 # 启动服务后接口才能访问，端口号为9000，默认ip地址为127.0.0.1
 server.run(port=9000, debug=True)

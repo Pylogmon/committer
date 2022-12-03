@@ -1,9 +1,9 @@
 from committer.ui.UI_mainwindow import Ui_MainWindow
 from committer.utils.standardpath import StandardPath
+from PySide2.QtWidgets import QWidget, QMessageBox
 from committer.utils.uitools import set_size
 from PySide2.QtGui import QIcon, QPixmap
 from committer.resource import rc_icons
-from PySide2.QtWidgets import QWidget
 from PySide2.QtCore import Signal
 import requests
 import json
@@ -20,6 +20,8 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.user_list = None
         self.product_list = None
         self.project_list = None
+        self.module_list = None
+        self.branch_list = None
         self.setupUi(self)
         self.init_ui()
         self.init_connect()
@@ -32,6 +34,11 @@ class MainWindow(QWidget, Ui_MainWindow):
     def init_connect(self):
         self.logout_btn.clicked.connect(self.logout)
         self.product_box.currentIndexChanged.connect(self.set_project_list)
+        self.project_box.currentIndexChanged.connect(self.set_module_list)
+        self.module_box.currentIndexChanged.connect(self.set_branch_list)
+        self.save_to_draft_btn.clicked.connect(self.save_to_draft)
+        self.save_to_template_btn.clicked.connect(self.save_to_template)
+        self.commit_btn.clicked.connect(self.commit)
 
     def set_icons(self):
         self.setWindowIcon(QIcon(QPixmap(":/icons/committer.png")))
@@ -129,6 +136,8 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.set_user_list()
         self.set_product_list()
         self.set_project_list()
+        self.set_module_list()
+        self.set_branch_list()
 
     def build_json(self):
         data = {'meta': {}, "auth": {}}
@@ -168,7 +177,6 @@ class MainWindow(QWidget, Ui_MainWindow):
             if status == "Success":
                 for i in self.product_list:
                     self.product_box.addItem(i["product_name"])
-                self.project_box.setCurrentIndex(0)
             else:
                 self.warning("Get Product Fail", "")
         except ConnectionError as e:
@@ -177,24 +185,157 @@ class MainWindow(QWidget, Ui_MainWindow):
             self.warning("TimeoutError", str(e))
 
     def set_project_list(self):
+        if not self.product_box.isEnabled():
+            return
+        current_product_id = self.get_id(self.product_list)
         try:
-            for i in self.product_list:
-                if i["product_name"] == self.product_box.currentText():
-                    current_product_id = i["product_id"]
-                    break
             req = requests.get(self.login_info["server"] + "/get_project",
                                params={"product_id": current_product_id},
                                timeout=5)
             status = json.loads(req.text)["status"]
             self.project_list = json.loads(req.text)["data"]
             if status == "Success":
+                self.project_box.setEnabled(True)
                 self.project_box.clear()
                 for i in self.project_list:
                     self.project_box.addItem(i["project_name"])
-                self.project_box.setEnabled(True)
             else:
-                self.warning("Get Product Fail", "")
+                self.project_box.setEnabled(False)
+                self.project_box.clear()
         except ConnectionError as e:
             self.warning("ConnectionError", str(e))
         except TimeoutError as e:
             self.warning("TimeoutError", str(e))
+
+    def set_module_list(self):
+        if not self.project_box.isEnabled():
+            return
+        current_product_id = self.get_id(self.product_list)
+        current_project_id = self.get_id(self.project_list)
+        try:
+            req = requests.get(self.login_info["server"] + "/get_module",
+                               params={
+                                   "product_id": current_product_id,
+                                   "project_id": current_project_id
+                               },
+                               timeout=5)
+            status = json.loads(req.text)["status"]
+            self.module_list = json.loads(req.text)["data"]
+            if status == "Success":
+                self.module_box.setEnabled(True)
+                self.module_box.clear()
+                for i in self.module_list:
+                    self.module_box.addItem(i["module_name"])
+            else:
+                self.module_box.setEnabled(False)
+                self.module_box.clear()
+        except ConnectionError as e:
+            self.warning("ConnectionError", str(e))
+        except TimeoutError as e:
+            self.warning("TimeoutError", str(e))
+
+    def set_branch_list(self):
+        if not self.module_box.isEnabled():
+            return
+        current_product_id = self.get_id(self.product_list)
+        current_project_id = self.get_id(self.project_list)
+        current_module_id = self.get_id(self.module_list)
+
+        try:
+            req = requests.get(self.login_info["server"] + "/get_branch",
+                               params={
+                                   "product_id": current_product_id,
+                                   "project_id": current_project_id,
+                                   "module_id": current_module_id
+                               },
+                               timeout=5)
+            status = json.loads(req.text)["status"]
+            self.branch_list = json.loads(req.text)["data"]
+            if status == "Success":
+                self.branch_box.clear()
+                for i in self.branch_list:
+                    self.branch_box.addItem(i["branch_name"])
+                self.branch_box.setEnabled(True)
+            else:
+                self.branch_box.clear()
+                self.branch_box.setEnabled(False)
+        except ConnectionError as e:
+            self.warning("ConnectionError", str(e))
+        except TimeoutError as e:
+            self.warning("TimeoutError", str(e))
+
+    def save_to_draft(self):
+        pass
+
+    def save_to_template(self):
+        pass
+
+    def commit(self):
+        data = {}
+        data["user_name"] = self.login_info["user_name"]
+        data["password"] = self.login_info["password"]
+        data["title"] = self.title_edit.text()
+        print(data)
+        if len(self.keywords_edit.text()) > 0:
+            data["keywords"] = self.keywords_edit.text()
+        data["product_id"] = self.get_id(self.product_list)
+        data["project_id"] = self.get_id(self.project_list)
+        if self.module_box.isEnabled():
+            data["module_id"] = self.get_id(self.module_list)
+        if self.branch_box.isEnabled():
+            data["branch_id"] = self.get_id(self.branch_list)
+        data["type"] = self.type_box.currentText()
+        data["severity"] = int(self.severity_box.currentText())
+        data["pri"] = int(self.pri_box.currentText())
+        data["assigned"] = self.get_id(self.user_list)
+        data["os"] = self.os_box.currentText()
+        data["browser"] = self.browser_box.currentText()
+        data["content"] = self.main_edit.toPlainText()
+        data["creator"] = self.get_my_id()
+        try:
+            req = requests.post(self.login_info["server"] + "/commit",
+                                data=data,
+                                timeout=5)
+            status = json.loads(req.text)["status"]
+            res = json.loads(req.text)["data"]
+            if status == "Success":
+                print(res)
+                self.info("提交成功", f"提交成功,CommitID:{res['commit_id']}")
+            else:
+                self.warning("提交失败", f"{res['message']}")
+        except ConnectionError as e:
+            self.warning("ConnectionError", str(e))
+        except TimeoutError as e:
+            self.warning("TimeoutError", str(e))
+
+    def warning(self, title, message):
+        QMessageBox.warning(self, title, message)
+
+    def info(self, title, message):
+        QMessageBox.information(self, title, message)
+
+    def get_id(self, list):
+        if len(list) > 0:
+            if "product_name" in list[0].keys():
+                type = "product"
+                box = self.product_box
+            if "project_name" in list[0].keys():
+                type = "project"
+                box = self.project_box
+            if "module_name" in list[0].keys():
+                type = "module"
+                box = self.module_box
+            if "branch_name" in list[0].keys():
+                type = "branch"
+                box = self.branch_box
+            if "user_name" in list[0].keys():
+                type = "user"
+                box = self.assigned_box
+            for i in list:
+                if i[f"{type}_name"] == box.currentText():
+                    return i[f"{type}_id"]
+
+    def get_my_id(self):
+        for i in self.user_list:
+            if i["user_name"] == self.login_info["user_name"]:
+                return i["user_id"]
