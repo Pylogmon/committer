@@ -17,19 +17,21 @@ class MainWindow(QWidget, Ui_MainWindow):
     def __init__(self, login_info):
         super(MainWindow, self).__init__()
         self.login_info = login_info
+        self.draft_dir = StandardPath.draft_dir()
+        self.template_dir = StandardPath.template_dir()
         self.user_list = None
         self.product_list = None
         self.project_list = None
         self.module_list = None
         self.branch_list = None
-        self.setupUi(self)
-        self.init_ui()
-        self.init_connect()
+        self.setupUi(self)  # 初始化ui
+        self.init_ui()  # 设置ui界面
+        self.init_connect()  # 初始化信号槽
 
     def init_ui(self):
-        self.set_icons()
-        self.set_other_ui()
-        self.set_boxes()
+        self.set_icons()  # 设置图标
+        self.set_other_ui()  # 设置其他ui选项
+        self.set_boxes()  # 设置下拉菜单
 
     def init_connect(self):
         self.logout_btn.clicked.connect(self.logout)
@@ -109,24 +111,24 @@ class MainWindow(QWidget, Ui_MainWindow):
             self.severity_box.addItem(str(i))
         for i in range(5):
             self.pri_box.addItem(str(i))
-        self.get_draft_list()
-        self.get_template_list()
+        self.set_draft_list()
+        self.set_template_list()
 
-    def get_draft_list(self):
-        draft_dir = StandardPath.draft_dir()
-        StandardPath.check(draft_dir)
+    def set_draft_list(self):
+        StandardPath.check(self.draft_dir)
+        self.draft_box.clear()
         self.draft_box.addItem("None")
-        for r, dirs, files in os.walk(draft_dir):
+        for r, dirs, files in os.walk(self.draft_dir):
             for i in files:
                 if i.endswith('json'):
                     self.draft_box.addItem(i.split('.')[0])
         self.draft_box.setCurrentText("None")
 
-    def get_template_list(self):
-        template_dir = StandardPath.template_dir()
-        StandardPath.check(template_dir)
+    def set_template_list(self):
+        StandardPath.check(self.template_dir)
+        self.template_box.clear()
         self.template_box.addItem("None")
-        for r, dirs, files in os.walk(template_dir):
+        for r, dirs, files in os.walk(self.template_dir):
             for i in files:
                 if i.endswith('json'):
                     self.template_box.addItem(i.split('.')[0])
@@ -140,8 +142,29 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.set_branch_list()
 
     def build_json(self):
-        data = {'meta': {}, "auth": {}}
-        data['meta']['product'] = self.product_box.currentText()
+        if not self.check_data():
+            return False
+        data = {}
+        data["user_name"] = self.login_info["user_name"]
+        data["password"] = self.login_info["password"]
+        data["title"] = self.title_edit.text()
+        if len(self.keywords_edit.text()) > 0:
+            data["keywords"] = self.keywords_edit.text()
+        data["product_id"] = self.get_id(self.product_list)
+        data["project_id"] = self.get_id(self.project_list)
+        if self.module_box.isEnabled():
+            data["module_id"] = self.get_id(self.module_list)
+        if self.branch_box.isEnabled():
+            data["branch_id"] = self.get_id(self.branch_list)
+        data["type"] = self.type_box.currentText()
+        data["severity"] = int(self.severity_box.currentText())
+        data["pri"] = int(self.pri_box.currentText())
+        data["assigned"] = self.get_id(self.user_list)
+        data["os"] = self.os_box.currentText()
+        data["browser"] = self.browser_box.currentText()
+        data["content"] = self.main_edit.toPlainText()
+        data["creator"] = self.get_my_id()
+        return data
 
     def logout(self):
         login_file = StandardPath.login_file()
@@ -265,33 +288,52 @@ class MainWindow(QWidget, Ui_MainWindow):
             self.warning("TimeoutError", str(e))
 
     def save_to_draft(self):
-        pass
+        data = self.build_json()
+        if data is False:
+            return
+        data["product_name"] = self.product_box.currentText()
+        data["project_name"] = self.project_box.currentText()
+        data["module_name"] = self.module_box.currentText()
+        data["branch_name"] = self.branch_box.currentText()
+        data["assigned_name"] = self.assigned_box.currentText()
+        draft_file = os.path.join(self.draft_dir, data["title"] + ".json")
+        if os.path.exists(draft_file):
+            result = QMessageBox.warning(
+                self, "文件已存在", f"{data['title']+'.json'}已存在，确定要覆盖吗？",
+                QMessageBox.Yes, QMessageBox.Cancel)
+            if result == 4194304:
+                return
+        with open(draft_file, 'w', encoding='utf-8') as f:
+            json.dump(data, f)
+        self.info("保存成功", f"{data['title']}已保存为草稿")
+        self.set_draft_list()
 
     def save_to_template(self):
-        pass
+        data = self.build_json()
+        if data is False:
+            return
+        data["product_name"] = self.product_box.currentText()
+        data["project_name"] = self.project_box.currentText()
+        data["module_name"] = self.module_box.currentText()
+        data["branch_name"] = self.branch_box.currentText()
+        data["assigned_name"] = self.assigned_box.currentText()
+        template_file = os.path.join(self.template_dir,
+                                     data["title"] + ".json")
+        if os.path.exists(template_file):
+            result = QMessageBox.warning(
+                self, "文件已存在", f"{data['title']+'.json'}已存在，确定要覆盖吗？",
+                QMessageBox.Yes, QMessageBox.Cancel)
+            if result == 4194304:
+                return
+        with open(template_file, 'w', encoding='utf-8') as f:
+            json.dump(data, f)
+        self.info("保存成功", f"{data['title']}已保存为模板")
+        self.set_template_list()
 
     def commit(self):
-        data = {}
-        data["user_name"] = self.login_info["user_name"]
-        data["password"] = self.login_info["password"]
-        data["title"] = self.title_edit.text()
-        print(data)
-        if len(self.keywords_edit.text()) > 0:
-            data["keywords"] = self.keywords_edit.text()
-        data["product_id"] = self.get_id(self.product_list)
-        data["project_id"] = self.get_id(self.project_list)
-        if self.module_box.isEnabled():
-            data["module_id"] = self.get_id(self.module_list)
-        if self.branch_box.isEnabled():
-            data["branch_id"] = self.get_id(self.branch_list)
-        data["type"] = self.type_box.currentText()
-        data["severity"] = int(self.severity_box.currentText())
-        data["pri"] = int(self.pri_box.currentText())
-        data["assigned"] = self.get_id(self.user_list)
-        data["os"] = self.os_box.currentText()
-        data["browser"] = self.browser_box.currentText()
-        data["content"] = self.main_edit.toPlainText()
-        data["creator"] = self.get_my_id()
+        data = self.build_json()
+        if data is False:
+            return
         try:
             req = requests.post(self.login_info["server"] + "/commit",
                                 data=data,
@@ -299,7 +341,6 @@ class MainWindow(QWidget, Ui_MainWindow):
             status = json.loads(req.text)["status"]
             res = json.loads(req.text)["data"]
             if status == "Success":
-                print(res)
                 self.info("提交成功", f"提交成功,CommitID:{res['commit_id']}")
             else:
                 self.warning("提交失败", f"{res['message']}")
@@ -339,3 +380,9 @@ class MainWindow(QWidget, Ui_MainWindow):
         for i in self.user_list:
             if i["user_name"] == self.login_info["user_name"]:
                 return i["user_id"]
+
+    def check_data(self):
+        if len(self.title_edit.text()) == 0:
+            self.title_edit.setFocus()
+            return False
+        return True
