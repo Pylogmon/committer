@@ -196,12 +196,44 @@ def commit():
         data_list = [
             'commit_id', 'title', 'product_id', 'project_id', 'module_id',
             'branch_id', 'keywords', 'type', 'severity', 'pri', 'assigned',
-            'os', 'browser', 'content', 'creator'
+            'os', 'browser', 'content', 'creator', 'mailto'
         ]
         for i in range(len(values[0])):
             data["data"][data_list[i]] = values[0][i]
     else:
         data = {"status": "Fail", "data": {}, "message": "Auth Fail"}
+    cursor.close()
+    conn.close()
+    res = json.dumps(data)
+    return res
+
+
+@server.route('/get_commit', methods=['get'])
+def get_commit():
+    creator = flask.request.args.get("creator")
+    assigned = flask.request.args.get("assigned")
+
+    path = split(realpath(__file__))[0]
+
+    conn = sqlite3.connect(join(path, 'test.db'))
+    cursor = conn.cursor()
+    # 执行查询语句:
+    if creator is not None:
+        cursor.execute('select * from `Commit` where creator=?', (creator, ))
+    if assigned is not None:
+        cursor.execute('select * from `Commit` where assigned=?', (assigned, ))
+    # 获得查询结果集:
+    values = cursor.fetchall()
+    data = []
+    data_list = [
+        'commit_id', 'title', 'product_id', 'project_id', 'module_id',
+        'branch_id', 'keywords', 'type', 'severity', 'pri', 'assigned', 'os',
+        'browser', 'content', 'creator', 'mailto'
+    ]
+    for i in values:
+        data.append({})
+        for j in range(len(values[0])):
+            data[-1][data_list[j]] = i[j]
     cursor.close()
     conn.close()
     res = json.dumps(data)

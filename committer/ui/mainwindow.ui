@@ -14,59 +14,104 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_5">
-   <item row="0" column="0">
-    <layout class="QGridLayout" name="gridLayout_2">
+   <item row="2" column="0">
+    <layout class="QGridLayout" name="gridLayout_3">
      <item row="0" column="0">
-      <widget class="QPushButton" name="my_commit_btn">
-       <property name="toolTip">
-        <string>我的提交 查看我提交的工单</string>
-       </property>
-       <property name="text">
-        <string>我的提交</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QPushButton" name="assigned_me_btn">
-       <property name="toolTip">
-        <string>待处理 查看指派给我的工单</string>
-       </property>
-       <property name="text">
-        <string>待处理</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="2">
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="0" column="3">
-      <widget class="QLabel" name="user_name_icon">
+      <widget class="QLabel" name="title_icon">
        <property name="text">
         <string>A</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="4">
-      <widget class="QLabel" name="user_name_label">
+     <item row="0" column="1">
+      <widget class="QLabel" name="title_label">
        <property name="text">
-        <string>Username</string>
+        <string>标题</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="5">
-      <widget class="QPushButton" name="logout_btn">
+     <item row="0" column="2">
+      <widget class="QLineEdit" name="title_edit">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;标题 &lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;必填&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
        <property name="text">
-        <string>退出登录</string>
+        <string/>
+       </property>
+       <property name="placeholderText">
+        <string>标题不能为空</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="keywords_icon">
+       <property name="text">
+        <string>A</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLabel" name="keywords_label">
+       <property name="text">
+        <string>关键词</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QLineEdit" name="keywords_edit">
+       <property name="toolTip">
+        <string>关键词 选填</string>
+       </property>
+       <property name="placeholderText">
+        <string>多个关键词用;隔开</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="4" column="0">
+    <layout class="QGridLayout" name="gridLayout_4">
+     <item row="0" column="0">
+      <widget class="QLabel" name="mailto_icon">
+       <property name="text">
+        <string>A</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="mailto_edit">
+       <property name="toolTip">
+        <string>抄送 选填</string>
+       </property>
+       <property name="placeholderText">
+        <string>抄送,多个邮箱用;隔开</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QPushButton" name="save_to_draft_btn">
+       <property name="toolTip">
+        <string>将当前编辑内容保存为草稿</string>
+       </property>
+       <property name="text">
+        <string>保存为草稿</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="3">
+      <widget class="QPushButton" name="save_to_template_btn">
+       <property name="toolTip">
+        <string>将当前内容作为模板保存</string>
+       </property>
+       <property name="text">
+        <string>保存为模板</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="4">
+      <widget class="QPushButton" name="commit_btn">
+       <property name="text">
+        <string>提交</string>
        </property>
       </widget>
      </item>
@@ -400,115 +445,66 @@
      </item>
     </layout>
    </item>
-   <item row="2" column="0">
-    <layout class="QGridLayout" name="gridLayout_3">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout_2">
      <item row="0" column="0">
-      <widget class="QLabel" name="title_icon">
+      <widget class="QPushButton" name="my_commit_btn">
+       <property name="toolTip">
+        <string>我的提交 查看我提交的工单</string>
+       </property>
        <property name="text">
-        <string>A</string>
+        <string>我的提交</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLabel" name="title_label">
+      <widget class="QPushButton" name="assigned_me_btn">
+       <property name="toolTip">
+        <string>待处理 查看指派给我的工单</string>
+       </property>
        <property name="text">
-        <string>标题</string>
+        <string>待处理</string>
        </property>
       </widget>
      </item>
      <item row="0" column="2">
-      <widget class="QLineEdit" name="title_edit">
-       <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;标题 &lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;必填&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
-       <property name="text">
-        <string/>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
        </property>
-       <property name="placeholderText">
-        <string>标题不能为空</string>
-       </property>
-      </widget>
+      </spacer>
      </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="keywords_icon">
+     <item row="0" column="3">
+      <widget class="QLabel" name="user_name_icon">
        <property name="text">
         <string>A</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
-      <widget class="QLabel" name="keywords_label">
+     <item row="0" column="4">
+      <widget class="QLabel" name="user_name_label">
        <property name="text">
-        <string>关键词</string>
+        <string>Username</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="2">
-      <widget class="QLineEdit" name="keywords_edit">
-       <property name="toolTip">
-        <string>关键词 选填</string>
-       </property>
-       <property name="placeholderText">
-        <string>多个关键词用;隔开</string>
+     <item row="0" column="5">
+      <widget class="QPushButton" name="logout_btn">
+       <property name="text">
+        <string>退出登录</string>
        </property>
       </widget>
      </item>
     </layout>
    </item>
    <item row="3" column="0">
-    <widget class="QPlainTextEdit" name="main_edit">
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;主要内容 描述复现步骤 定位思路 &lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;必填&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="0">
-    <layout class="QGridLayout" name="gridLayout_4">
-     <item row="0" column="0">
-      <widget class="QLabel" name="mailto_icon">
-       <property name="text">
-        <string>A</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="mailto_edit">
-       <property name="toolTip">
-        <string>抄送 选填</string>
-       </property>
-       <property name="placeholderText">
-        <string>抄送,多个邮箱用;隔开</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="2">
-      <widget class="QPushButton" name="save_to_draft_btn">
-       <property name="toolTip">
-        <string>将当前编辑内容保存为草稿</string>
-       </property>
-       <property name="text">
-        <string>保存为草稿</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="3">
-      <widget class="QPushButton" name="save_to_template_btn">
-       <property name="toolTip">
-        <string>将当前内容作为模板保存</string>
-       </property>
-       <property name="text">
-        <string>保存为模板</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="4">
-      <widget class="QPushButton" name="commit_btn">
-       <property name="text">
-        <string>提交</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <widget class="QTextEdit" name="main_edit"/>
    </item>
   </layout>
  </widget>

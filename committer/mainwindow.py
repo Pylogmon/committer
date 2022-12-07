@@ -5,6 +5,7 @@ from committer.utils.uitools import set_size
 from PySide2.QtGui import QIcon, QPixmap
 from committer.resource import rc_icons
 from PySide2.QtCore import Signal
+from committer.form import Form
 from time import sleep
 import requests
 import json
@@ -25,6 +26,9 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.project_list = {}
         self.module_list = {}
         self.branch_list = {}
+        self.my_commit_list = []
+        self.assigned_me_list = []
+        self.view_page = None
         self.setupUi(self)  # 初始化ui
         self.init_ui()  # 设置ui界面
         self.init_connect()  # 初始化信号槽
@@ -53,6 +57,10 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.draft_box.currentTextChanged.connect(self.load_draft)
         # 加载模板
         self.template_box.currentTextChanged.connect(self.load_template)
+        # 查看我的提交
+        self.my_commit_btn.clicked.connect(self.view_my_commit)
+        # 查看待处理
+        self.assigned_me_btn.clicked.connect(self.view_assigned_me)
 
     # 退出登陆
     def logout(self):
@@ -165,6 +173,8 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.set_project_box()
         self.set_module_box()
         self.set_branch_box()
+        self.set_my_commit_btn()
+        self.set_assigned_me_btn()
 
     # 设置指派下拉菜单 /get_user
     def set_assigned_box(self):
@@ -258,6 +268,7 @@ class MainWindow(QWidget, Ui_MainWindow):
         except TimeoutError as e:
             self.warning("TimeoutError", str(e))
 
+    # 获取分支列表 /get_branch
     def set_branch_box(self):
         if not self.module_box.count():
             self.branch_box.clear()
@@ -285,6 +296,42 @@ class MainWindow(QWidget, Ui_MainWindow):
             else:
                 self.branch_box.clear()
                 self.branch_box.setEnabled(False)
+        except ConnectionError as e:
+            self.warning("ConnectionError", str(e))
+        except TimeoutError as e:
+            self.warning("TimeoutError", str(e))
+
+    # 设置我的提交角标
+    def set_my_commit_btn(self):
+        try:
+            req = requests.get(
+                self.login_info["server"] + "/get_commit",
+                params={
+                    "creator": self.user_list[self.login_info["user_name"]],
+                },
+                timeout=5)
+            self.my_commit_list = json.loads(req.text)
+            num = len(self.my_commit_list)
+            if num > 0:
+                self.my_commit_btn.setText(f"我的提交({num})")
+        except ConnectionError as e:
+            self.warning("ConnectionError", str(e))
+        except TimeoutError as e:
+            self.warning("TimeoutError", str(e))
+
+    # 设置待处理角标
+    def set_assigned_me_btn(self):
+        try:
+            req = requests.get(
+                self.login_info["server"] + "/get_commit",
+                params={
+                    "assigned": self.user_list[self.login_info["user_name"]],
+                },
+                timeout=5)
+            self.assigned_me_list = json.loads(req.text)
+            num = len(self.assigned_me_list)
+            if num > 0:
+                self.assigned_me_btn.setText(f"待处理({num})")
         except ConnectionError as e:
             self.warning("ConnectionError", str(e))
         except TimeoutError as e:
@@ -356,7 +403,7 @@ class MainWindow(QWidget, Ui_MainWindow):
         data["assigned"] = self.user_list[self.assigned_box.currentText()]
         data["os"] = self.os_box.currentText()
         data["browser"] = self.browser_box.currentText()
-        data["content"] = self.main_edit.toPlainText()
+        data["content"] = self.main_edit.toMarkdown()
         data["creator"] = self.user_list[data["user_name"]]
         data["mailto"] = self.mailto_edit.text()
         return data
@@ -373,6 +420,7 @@ class MainWindow(QWidget, Ui_MainWindow):
             status = json.loads(req.text)["status"]
             res = json.loads(req.text)["data"]
             if status == "Success":
+                self.set_my_commit_btn()
                 self.info("提交成功", f"提交成功,CommitID:{res['commit_id']}")
             else:
                 self.warning("提交失败", f"{res['message']}")
@@ -463,6 +511,14 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.keywords_edit.setText(data["keywords"])
         self.main_edit.setPlainText(data["content"])
         self.info("成功", "草稿/模板加载成功")
+
+    # 查看我的提交
+    def view_my_commit(self):
+        self.view_page = Form(self.my_commit_list)
+
+    # 查看待处理
+    def view_assigned_me(self):
+        self.view_page = Form(self.assigned_me_list)
 
     def warning(self, title, message):
         QMessageBox.warning(self, title, message)
