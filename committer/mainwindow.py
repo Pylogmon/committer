@@ -1,6 +1,6 @@
 from committer.ui.UI_mainwindow import Ui_MainWindow
 from committer.utils.standardpath import StandardPath
-from PySide2.QtWidgets import QWidget, QMessageBox
+from PySide2.QtWidgets import QWidget, QMessageBox, QPlainTextEdit
 from committer.utils.uitools import set_size
 from PySide2.QtGui import QIcon, QPixmap
 from committer.resource import rc_icons
@@ -41,6 +41,8 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.save_to_draft_btn.clicked.connect(self.save_to_draft)
         self.save_to_template_btn.clicked.connect(self.save_to_template)
         self.commit_btn.clicked.connect(self.commit)
+        self.draft_box.currentTextChanged.connect(self.load_draft)
+        self.template_box.currentTextChanged.connect(self.load_template)
 
     def set_icons(self):
         self.setWindowIcon(QIcon(QPixmap(":/icons/committer.png")))
@@ -232,6 +234,8 @@ class MainWindow(QWidget, Ui_MainWindow):
 
     def set_module_list(self):
         if not self.project_box.isEnabled():
+            self.module_box.clear()
+            self.module_box.setEnabled(False)
             return
         current_product_id = self.get_id(self.product_list)
         current_project_id = self.get_id(self.project_list)
@@ -259,6 +263,8 @@ class MainWindow(QWidget, Ui_MainWindow):
 
     def set_branch_list(self):
         if not self.module_box.isEnabled():
+            self.branch_box.clear()
+            self.branch_box.setEnabled(False)
             return
         current_product_id = self.get_id(self.product_list)
         current_project_id = self.get_id(self.project_list)
@@ -330,6 +336,7 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.info("保存成功", f"{data['title']}已保存为模板")
         self.set_template_list()
 
+    # 提交表单
     def commit(self):
         data = self.build_json()
         if data is False:
@@ -349,12 +356,7 @@ class MainWindow(QWidget, Ui_MainWindow):
         except TimeoutError as e:
             self.warning("TimeoutError", str(e))
 
-    def warning(self, title, message):
-        QMessageBox.warning(self, title, message)
-
-    def info(self, title, message):
-        QMessageBox.information(self, title, message)
-
+    # 将名称转换为ID
     def get_id(self, list):
         if len(list) > 0:
             if "product_name" in list[0].keys():
@@ -376,13 +378,58 @@ class MainWindow(QWidget, Ui_MainWindow):
                 if i[f"{type}_name"] == box.currentText():
                     return i[f"{type}_id"]
 
+    # 获取我的ID
     def get_my_id(self):
         for i in self.user_list:
             if i["user_name"] == self.login_info["user_name"]:
                 return i["user_id"]
 
+    # 检查数据是否非空
     def check_data(self):
         if len(self.title_edit.text()) == 0:
             self.title_edit.setFocus()
             return False
         return True
+
+    def load_draft(self):
+        draft_file = self.draft_box.currentText()
+        if draft_file == "None":
+            return
+        draft_file = os.path.join(self.draft_dir, draft_file + ".json")
+        self.load_json(draft_file)
+
+    def load_template(self):
+        template_file = self.template_box.currentText()
+        if template_file == "None":
+            return
+        template_file = os.path.join(self.template_dir,
+                                     template_file + ".json")
+        self.load_json(template_file)
+
+    def load_json(self, json_file):
+        with open(json_file, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        self.product_box.setCurrentText(data["product_name"])
+        self.project_box.setCurrentText(data["project_name"])
+        if len(data["module_name"]) > 0:
+            self.module_box.setCurrentText(data["module_name"])
+        if len(data["branch_name"]) > 0:
+            self.branch_box.setCurrentText(data["branch_name"])
+        self.assigned_box.setCurrentText(data["assigned_name"])
+        self.type_box.setCurrentText(data["type"])
+        self.severity_box.setCurrentText(str(data["severity"]))
+        self.pri_box.setCurrentText(str(data["pri"]))
+        self.os_box.setCurrentText(data["os"])
+        self.browser_box.setCurrentText(data["browser"])
+        self.title_edit.setText(data["title"])
+        if "keywords" in data.keys():
+            self.keywords_edit.setText(data["keywords"])
+        else:
+            self.keywords_edit.clear()
+        self.main_edit.setPlainText(data["content"])
+
+    def warning(self, title, message):
+        QMessageBox.warning(self, title, message)
+
+    def info(self, title, message):
+        QMessageBox.information(self, title, message)
