@@ -31,6 +31,8 @@ class Login(QWidget, Ui_Login):
         # 使窗口加载完成后再自动登录
         QTimer.singleShot(0, self.auto_login)
         self.login_btn.clicked.connect(self.login)
+        self.user_name_edit.returnPressed.connect(self.login_btn.clicked)
+        self.password_edit.returnPressed.connect(self.login_btn.clicked)
 
     # 自动登陆
     def auto_login(self):
