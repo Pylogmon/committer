@@ -403,7 +403,7 @@ class MainWindow(QWidget, Ui_MainWindow):
         data["assigned"] = self.user_list[self.assigned_box.currentText()]
         data["os"] = self.os_box.currentText()
         data["browser"] = self.browser_box.currentText()
-        data["content"] = self.main_edit.toMarkdown()
+        data["content"] = self.main_edit.toPlainText()
         data["creator"] = self.user_list[data["user_name"]]
         data["mailto"] = self.mailto_edit.text()
         return data
