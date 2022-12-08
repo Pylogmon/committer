@@ -22,5 +22,8 @@
     <file>icons/commit.svg</file>
     <file>icons/version.svg</file>
     <file>icons/password.svg</file>
+
+    <file>qss/login.qss</file>
+    <file>qss/mainwindow.qss</file>
 </qresource>
 </RCC>

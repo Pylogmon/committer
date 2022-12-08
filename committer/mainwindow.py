@@ -3,8 +3,8 @@ from committer.utils.standardpath import StandardPath
 from PySide2.QtWidgets import QWidget, QMessageBox
 from committer.utils.uitools import set_size
 from PySide2.QtGui import QIcon, QPixmap
-from committer.resource import rc_icons
-from PySide2.QtCore import Signal
+from PySide2.QtCore import Signal, QFile
+from committer.resource import resource
 from committer.form import Form
 from time import sleep
 import requests
@@ -114,6 +114,11 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.module_box.setEnabled(False)
         self.branch_box.setEnabled(False)
         self.assigned_box.setEditable(True)
+        qss_file = QFile(":/qss/mainwindow.qss")
+        qss_file.open(QFile.ReadOnly)
+        qss = str(qss_file.readAll(), encoding="utf-8")
+        print(qss)
+        self.setStyleSheet(qss)
 
     def set_boxes(self):
         self.set_local_box()

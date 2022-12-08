@@ -1,13 +1,13 @@
 from committer.utils.standardpath import StandardPath
 from PySide2.QtWidgets import QWidget, QMessageBox
+from PySide2.QtCore import Signal, QTimer, QFile
 from requests.exceptions import ConnectionError
 from requests.exceptions import MissingSchema
 from requests.exceptions import InvalidSchema
 from committer.utils.uitools import set_size
 from committer.ui.UI_login import Ui_Login
-from PySide2.QtCore import Signal, QTimer
 from PySide2.QtGui import QIcon, QPixmap
-from committer.resource import rc_icons
+from committer.resource import resource
 from requests import post
 import json
 import os
@@ -113,3 +113,8 @@ class Login(QWidget, Ui_Login):
         self.user_name_icon.setPixmap(QPixmap(":/icons/user.svg"))
         self.server_icon.setPixmap(QPixmap(":/icons/browser.svg"))
         self.password_icon.setPixmap(QPixmap(":/icons/password.svg"))
+
+        qss_file = QFile(":/qss/login.qss")
+        qss_file.open(QFile.ReadOnly)
+        qss = str(qss_file.readAll(), encoding="utf-8")
+        self.setStyleSheet(qss)

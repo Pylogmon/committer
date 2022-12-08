@@ -1,0 +1,52 @@
+#MainWindow {
+background-color:#212121;
+}
+
+QLineEdit {
+/* 编辑器样式 */
+font-size:20px;
+border-style: none;
+background-color: #3e3e3e;
+color: #dddddd;
+height:44px;
+border-radius:10px;
+}
+QTextEdit {
+/* 编辑器样式 */
+font-size:20px;
+border-style: none;
+background-color: #3e3e3e;
+color: #dddddd;
+border-radius:10px;
+}
+/* 按钮样式 */
+QPushButton {
+border-style:solid;
+border-width:2px;
+border-color:#444444;
+border-radius:10px;
+background-color:#333333;
+color:#dddddd;
+height:40px;
+font-size:20px;
+}
+QPushButton:hover {
+border-style:solid;
+border-width:2px;
+border-color:#444444;
+border-radius:10px;
+background-color:#3e3e3e;
+color:#dddddd;
+height:40px;
+font-size:20px;
+}
+QPushButton:pressed {
+border-style:solid;
+border-width:2px;
+border-color:#444444;
+border-radius:10px;
+background-color:#333333;
+color:#dddddd;
+height:40px;
+font-size:18px;
+}
