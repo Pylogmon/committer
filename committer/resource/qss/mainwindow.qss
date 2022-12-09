@@ -77,7 +77,6 @@ QComboBox {
 /* 下拉菜单样式 禁用 */
 QComboBox:disabled {
     background-color: #292929;
-    color: rgb(160, 160, 160);
 }
 
 /* 下拉菜单样式 悬停 */
