@@ -96,11 +96,6 @@ class Ui_Form(object):
 
         self.gridLayout_3 = QGridLayout()
         self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.type = QLabel(Form)
-        self.type.setObjectName(u"type")
-
-        self.gridLayout_3.addWidget(self.type, 0, 0, 1, 1)
-
         self.horizontalLayout_4 = QHBoxLayout()
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.severity_l = QLabel(Form)
@@ -114,37 +109,7 @@ class Ui_Form(object):
         self.horizontalLayout_4.addWidget(self.severity)
 
 
-        self.gridLayout_3.addLayout(self.horizontalLayout_4, 0, 1, 1, 1)
-
-        self.horizontalLayout_3 = QHBoxLayout()
-        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.pri_l = QLabel(Form)
-        self.pri_l.setObjectName(u"pri_l")
-
-        self.horizontalLayout_3.addWidget(self.pri_l)
-
-        self.pri = QLabel(Form)
-        self.pri.setObjectName(u"pri")
-
-        self.horizontalLayout_3.addWidget(self.pri)
-
-
-        self.gridLayout_3.addLayout(self.horizontalLayout_3, 0, 2, 1, 1)
-
-        self.horizontalLayout_2 = QHBoxLayout()
-        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.os_l = QLabel(Form)
-        self.os_l.setObjectName(u"os_l")
-
-        self.horizontalLayout_2.addWidget(self.os_l)
-
-        self.os = QLabel(Form)
-        self.os.setObjectName(u"os")
-
-        self.horizontalLayout_2.addWidget(self.os)
-
-
-        self.gridLayout_3.addLayout(self.horizontalLayout_2, 0, 3, 1, 1)
+        self.gridLayout_3.addLayout(self.horizontalLayout_4, 0, 2, 1, 1)
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
@@ -159,7 +124,46 @@ class Ui_Form(object):
         self.horizontalLayout.addWidget(self.browser)
 
 
-        self.gridLayout_3.addLayout(self.horizontalLayout, 0, 4, 1, 1)
+        self.gridLayout_3.addLayout(self.horizontalLayout, 0, 5, 1, 1)
+
+        self.horizontalLayout_3 = QHBoxLayout()
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.pri_l = QLabel(Form)
+        self.pri_l.setObjectName(u"pri_l")
+
+        self.horizontalLayout_3.addWidget(self.pri_l)
+
+        self.pri = QLabel(Form)
+        self.pri.setObjectName(u"pri")
+
+        self.horizontalLayout_3.addWidget(self.pri)
+
+
+        self.gridLayout_3.addLayout(self.horizontalLayout_3, 0, 3, 1, 1)
+
+        self.horizontalLayout_2 = QHBoxLayout()
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.os_l = QLabel(Form)
+        self.os_l.setObjectName(u"os_l")
+
+        self.horizontalLayout_2.addWidget(self.os_l)
+
+        self.os = QLabel(Form)
+        self.os.setObjectName(u"os")
+
+        self.horizontalLayout_2.addWidget(self.os)
+
+
+        self.gridLayout_3.addLayout(self.horizontalLayout_2, 0, 4, 1, 1)
+
+        self.type = QLabel(Form)
+        self.type.setObjectName(u"type")
+
+        self.gridLayout_3.addWidget(self.type, 0, 1, 1, 1)
+
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_3.addItem(self.horizontalSpacer_2, 0, 0, 1, 1)
 
 
         self.gridLayout_5.addLayout(self.gridLayout_3, 2, 1, 1, 1)
@@ -188,15 +192,15 @@ class Ui_Form(object):
         self.connect_3.setText(QCoreApplication.translate("Form", u"-", None))
         self.branch.setText(QCoreApplication.translate("Form", u"branch", None))
         self.module.setText(QCoreApplication.translate("Form", u"module", None))
-        self.type.setText(QCoreApplication.translate("Form", u"type", None))
         self.severity_l.setText(QCoreApplication.translate("Form", u"\u4e25\u91cd\u7a0b\u5ea6\uff1a", None))
         self.severity.setText(QCoreApplication.translate("Form", u"severity", None))
+        self.browser_l.setText(QCoreApplication.translate("Form", u"\u6d4f\u89c8\u5668\uff1a", None))
+        self.browser.setText(QCoreApplication.translate("Form", u"browser", None))
         self.pri_l.setText(QCoreApplication.translate("Form", u"\u4f18\u5148\u7ea7\uff1a", None))
         self.pri.setText(QCoreApplication.translate("Form", u"pri", None))
         self.os_l.setText(QCoreApplication.translate("Form", u"\u64cd\u4f5c\u7cfb\u7edf\uff1a", None))
         self.os.setText(QCoreApplication.translate("Form", u"os", None))
-        self.browser_l.setText(QCoreApplication.translate("Form", u"\u6d4f\u89c8\u5668\uff1a", None))
-        self.browser.setText(QCoreApplication.translate("Form", u"browser", None))
+        self.type.setText(QCoreApplication.translate("Form", u"type", None))
         self.preview.setMarkdown("")
     # retranslateUi
 

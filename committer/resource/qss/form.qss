@@ -7,6 +7,7 @@
 /* Label样式 */
 QLabel {
     color: #eeeeee;
+    font-size: 18px;
 }
 
 /* 下拉菜单样式 */
@@ -27,7 +28,7 @@ QComboBox:disabled {
 
 /* 下拉菜单样式 悬停 */
 QComboBox:hover {
-    background-color: #444444;
+    background-color: #3e3e3e;
     border: 2px solid #444444;
     font-size: 20px;
 }
