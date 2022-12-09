@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Development
+Name=Committer
+GenericName=Committer
+Type=Application
+Exec=/opt/apps/cn.huguoyang.committer/files/committer/main.py %F
+Icon=cn.huguoyang.committer
+Comment[zh_CN]=提单工具
+GenericName[zh_CN]=提单工具
+Name[zh_CN]=提单工具

@@ -1,0 +1,6 @@
+Package: committer
+Version: 0.0.1
+Architecture: amd64
+Maintainer: ambition-echo <ambition_echo@outlook.com>
+Description: 提单工具
+Depends: python3-requests, python3-pyside2.qtcore, python3-pyside2.qtgui, python3-pyside2.qtsvg

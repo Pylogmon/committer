@@ -1,0 +1,46 @@
+name: Deb
+on:
+  push:
+    paths-ignore:
+      - '.gitlab-ci.yml'
+      - '*.md'
+      - 'LICENSE'
+
+jobs:
+  Package:
+    name: Package
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Install git
+        run: |
+          sudo apt update
+          sudo apt install -y git
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Package
+        run: |
+          sed -i "s/Version:.*/Version: $(git describe --tags |  sed  's/\([^-]*-g\)/r\1/;s/-/./g')/g" deb/DEBIAN/control
+          sed -i "s/\"version\":.*/\"version\": \"$(git describe --tags |  sed  's/\([^-]*-g\)/r\1/;s/-/./g')\",/g" deb/opt/apps/cn.huguoyang.committer/info
+          mkdir -p deb/opt/apps/cn.huguoyang.committer/files
+          cp -r committer deb/opt/apps/cn.huguoyang.committer/files
+          chmod 755 deb/DEBIAN/* && chmod 755 deb/DEBIAN
+          chmod +x deb/opt/apps/cn.huguoyang.committer/files/committer/main.py
+          dpkg -b deb committer-amd64.deb
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: committer-amd64.deb
+          path: committer-amd64.deb
+          if-no-files-found: error
+
+      - name: Upload Release
+        if: startsWith(github.ref, 'refs/tags')
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.TOKEN }}
+          file: /home/runner/work/committer/committer/committer-amd64.deb
+          tag: ${{ github.ref }}
+          overwrite: true
+
