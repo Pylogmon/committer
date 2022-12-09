@@ -7,33 +7,39 @@
 /* Label样式 */
 QLabel {
     color: #eeeeee;
+    font-size: 18px;
 }
 
 /* 下拉菜单样式 */
 QComboBox {
-    border-radius: 5px;
+    border-radius: 10px;
     border: 2px solid #444444;
     background-color: #333333;
     color: #eeeeee;
+    height: 40px;
+    font-size: 20px;
 }
 
 /* 下拉菜单样式 禁用 */
 QComboBox:disabled {
     background-color: #292929;
+    color: rgb(160, 160, 160);
 }
 
 /* 下拉菜单样式 悬停 */
 QComboBox:hover {
     background-color: #3e3e3e;
     border: 2px solid #444444;
+    font-size: 20px;
 }
 
 /* 下拉菜单样式 点击 */
 QComboBox:on {
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: #333333;
     color: #eeeeee;
     border: 2px solid #444444;
+    font-size: 18px;
 }
 
 /* 下拉框样式 */
@@ -41,6 +47,12 @@ QComboBox QAbstractItemView {
     outline: 0px;
     color: #eeeeee;
     background-color: #252525;
+    font-size: 20px;
+}
+
+/* 下拉框每一项高度 */
+QComboBox QAbstractItemView::item {
+    height: 40px;
 }
 
 /* 下拉框样式 选中 */
@@ -71,17 +83,19 @@ QComboBox::down-arrow:on {
 
 /* 编辑器样式 */
 QTextEdit {
+    font-size: 20px;
     border-style: none;
     background-color: #3e3e3e;
     color: #eeeeee;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 #Meta {
+    font-size: 20px;
     border-style: none;
     background-color: #3e3e3e;
     color: #eeeeee;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 QScrollBar:vertical {
