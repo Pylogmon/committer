@@ -20,13 +20,19 @@ class Form(QWidget, Ui_Form):
         self.show()
 
     def init_ui(self):
+        # 加载qss样式表
         qss_file = QFile(":/qss/form.qss")
         qss_file.open(QFile.ReadOnly)
         qss = qss_file.readAll().data().decode()
         self.setStyleSheet(qss)
-
+        # 加载commit列表
         for i in self.commit_list:
             self.commit_box.addItem(f"{i['commit_id']}: {i['title']}")
+        # 获取服务器地址
+        with open(self.login_file, 'r', encoding='utf-8') as f:
+            info = json.load(f)
+            self.server = info["server"]
+        # 加载commit详细信息
         self.view_content()
 
     def init_connect(self):
@@ -35,9 +41,6 @@ class Form(QWidget, Ui_Form):
     def view_content(self):
         if len(self.commit_list) == 0:
             return
-        with open(self.login_file, 'r', encoding='utf-8') as f:
-            info = json.load(f)
-            self.server = info["server"]
         commit = self.commit_list[self.commit_box.currentIndex()]
         self.setWindowTitle(f"Commit:{commit['commit_id']}")
         self.creator.setText(self.get_name("user", commit["creator"]))
@@ -59,10 +62,12 @@ class Form(QWidget, Ui_Form):
         self.browser.setText(commit["browser"])
         content = QTextDocument()
         text = commit["content"]
+        # 去除服务器传递导致的多个\\n
         text = eval(repr(text).replace("\\\\", "\\"))
-        content.setMarkdown(text, QTextDocument.MarkdownDialectGitHub)
+        content.setMarkdown(text)
         self.preview.setDocument(content)
 
+    # 通过ID获取名称
     def get_name(self, name, id, id1=None, id2=None, id3=None):
         try:
             params = {}

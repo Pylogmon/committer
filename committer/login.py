@@ -15,7 +15,7 @@ import os
 
 class Login(QWidget, Ui_Login):
 
-    login_success = Signal(dict)
+    login_success = Signal(dict)  # 登陆成功信号
 
     def __init__(self):
         super(Login, self).__init__()
@@ -44,7 +44,9 @@ class Login(QWidget, Ui_Login):
             self.password_edit.setText(self.login_info["password"])
             self.login()
 
+    # 登陆
     def login(self):
+        # 检查输入是否为空
         if not self.check():
             return
         self.get_data()
@@ -104,6 +106,7 @@ class Login(QWidget, Ui_Login):
     def warning(self, title, message):
         QMessageBox.warning(self, title, message)
 
+    # 初始化ui
     def init_ui(self):
         self.setWindowTitle("Login")
         self.setWindowIcon(QIcon(QPixmap(":/icons/committer.png")))
@@ -113,7 +116,7 @@ class Login(QWidget, Ui_Login):
         self.user_name_icon.setPixmap(QPixmap(":/icons/user.svg"))
         self.server_icon.setPixmap(QPixmap(":/icons/browser.svg"))
         self.password_icon.setPixmap(QPixmap(":/icons/password.svg"))
-
+        # 加载qss样式表
         qss_file = QFile(":/qss/login.qss")
         qss_file.open(QFile.ReadOnly)
         qss = qss_file.readAll().data().decode()

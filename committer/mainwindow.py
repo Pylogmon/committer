@@ -14,7 +14,7 @@ import os
 
 class MainWindow(QWidget, Ui_MainWindow):
 
-    logout_success = Signal()
+    logout_success = Signal()  # 登出成功信号
 
     def __init__(self, login_info):
         super(MainWindow, self).__init__()
@@ -72,6 +72,7 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.logout_success.emit()
         self.close()
 
+    # 设置界面图标
     def set_icons(self):
         self.setWindowIcon(QIcon(QPixmap(":/icons/committer.png")))
         self.my_commit_btn.setIcon(QIcon(QPixmap(":/icons/my.svg")))
@@ -113,15 +114,18 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.project_box.setEnabled(False)
         self.module_box.setEnabled(False)
         self.branch_box.setEnabled(False)
+        # 加载qss样式表
         qss_file = QFile(":/qss/mainwindow.qss")
         qss_file.open(QFile.ReadOnly)
         qss = qss_file.readAll().data().decode()
         self.setStyleSheet(qss)
 
+    # 设置下拉菜单
     def set_boxes(self):
         self.set_local_box()
         self.set_remote_box()
 
+    # 本地下拉菜单
     def set_local_box(self):
         type_list = [
             'baselineedition', 'docerror', 'reliable', 'compatible',
@@ -462,10 +466,13 @@ class MainWindow(QWidget, Ui_MainWindow):
 
     # 加载草稿/模板json文件
     def load_json(self, json_file):
+        # 读取json
         with open(json_file, 'r', encoding='utf-8') as f:
             data = json.load(f)
+        # 查看product_name是否存在
         index = self.product_box.findText(data["product_name"])
         if index >= 0:
+            # 设置产品
             self.product_box.setCurrentIndex(index)
         else:
             self.warning("错误", "草稿/模板错误，找不到对应的产品名称")
@@ -474,6 +481,7 @@ class MainWindow(QWidget, Ui_MainWindow):
         for i in range(20):
             index = self.project_box.findText(data["project_name"])
             if index >= 0:
+                # 设置项目
                 self.project_box.setCurrentIndex(index)
                 break
             else:
@@ -481,10 +489,12 @@ class MainWindow(QWidget, Ui_MainWindow):
         else:
             self.warning("错误", "草稿/模板错误，找不到对应的项目名称")
             return
+        # 检查是否需要设置module
         if len(data["module_name"]) > 0:
             for i in range(20):
                 index = self.module_box.findText(data["module_name"])
                 if index >= 0:
+                    # 设置模块
                     self.module_box.setCurrentIndex(index)
                     break
                 else:
@@ -492,10 +502,12 @@ class MainWindow(QWidget, Ui_MainWindow):
             else:
                 self.warning("错误", "草稿/模板错误，找不到对应的模块名称")
                 return
+        # 检查是否需要设置branch
         if len(data["branch_name"]) > 0:
             for i in range(20):
                 index = self.branch_box.findText(data["branch_name"])
                 if index >= 0:
+                    # 设置分支
                     self.branch_box.setCurrentIndex(index)
                     break
                 else:
@@ -503,12 +515,14 @@ class MainWindow(QWidget, Ui_MainWindow):
             else:
                 self.warning("错误", "草稿/模板错误，找不到对应的分支名称")
                 return
+        # 设置assigned
         index = self.assigned_box.findText(data["assigned_name"])
         if index >= 0:
             self.assigned_box.setCurrentIndex(index)
         else:
             self.warning("错误", "草稿/模板错误，找不到对应的用户名称")
             return
+        # 以下选项无需检查
         self.type_box.setCurrentText(data["type"])
         self.severity_box.setCurrentText(str(data["severity"]))
         self.pri_box.setCurrentText(str(data["pri"]))
