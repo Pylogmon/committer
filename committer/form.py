@@ -15,12 +15,13 @@ class Form(QWidget, Ui_Form):
         self.show()
 
     def init_ui(self):
-        for i in self.commit_list:
-            self.commit_box.addItem(f"{i['commit_id']}: {i['title']}")
-        qss_file = QFile(":/qss/mainwindow.qss")
+        qss_file = QFile(":/qss/form.qss")
         qss_file.open(QFile.ReadOnly)
         qss = str(qss_file.readAll(), encoding="utf-8")
         self.setStyleSheet(qss)
+
+        for i in self.commit_list:
+            self.commit_box.addItem(f"{i['commit_id']}: {i['title']}")
         self.view_content()
 
     def init_connect(self):
