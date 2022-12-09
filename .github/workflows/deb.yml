@@ -25,6 +25,13 @@ jobs:
           sed -i "s/\"version\":.*/\"version\": \"$(git describe --tags |  sed  's/\([^-]*-g\)/r\1/;s/-/./g')\",/g" deb/opt/apps/cn.huguoyang.committer/info
           mkdir -p deb/opt/apps/cn.huguoyang.committer/files
           cp -r committer deb/opt/apps/cn.huguoyang.committer/files
+          rm -r deb/opt/apps/cn.huguoyang.committer/files/committer/mock_server
+          rm -r deb/opt/apps/cn.huguoyang.committer/files/committer/resource/icons
+          rm -r deb/opt/apps/cn.huguoyang.committer/files/committer/resource/qss
+          rm deb/opt/apps/cn.huguoyang.committer/files/committer/resource/rcc.sh
+          rm deb/opt/apps/cn.huguoyang.committer/files/committer/resource/resource.qrc
+          rm deb/opt/apps/cn.huguoyang.committer/files/committer/ui/*.ui
+          rm deb/opt/apps/cn.huguoyang.committer/files/committer/ui/uic.sh
           chmod 755 deb/DEBIAN/* && chmod 755 deb/DEBIAN
           chmod +x deb/opt/apps/cn.huguoyang.committer/files/committer/main.py
           dpkg -b deb committer-amd64.deb
