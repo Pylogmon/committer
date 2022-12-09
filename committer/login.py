@@ -116,5 +116,5 @@ class Login(QWidget, Ui_Login):
 
         qss_file = QFile(":/qss/login.qss")
         qss_file.open(QFile.ReadOnly)
-        qss = str(qss_file.readAll(), encoding="utf-8")
+        qss = qss_file.readAll().data().decode()
         self.setStyleSheet(qss)

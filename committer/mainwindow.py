@@ -115,7 +115,7 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.branch_box.setEnabled(False)
         qss_file = QFile(":/qss/mainwindow.qss")
         qss_file.open(QFile.ReadOnly)
-        qss = str(qss_file.readAll(), encoding="utf-8")
+        qss = qss_file.readAll().data().decode()
         self.setStyleSheet(qss)
 
     def set_boxes(self):

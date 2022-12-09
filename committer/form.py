@@ -17,7 +17,7 @@ class Form(QWidget, Ui_Form):
     def init_ui(self):
         qss_file = QFile(":/qss/form.qss")
         qss_file.open(QFile.ReadOnly)
-        qss = str(qss_file.readAll(), encoding="utf-8")
+        qss = qss_file.readAll().data().decode()
         self.setStyleSheet(qss)
 
         for i in self.commit_list:
