@@ -179,10 +179,10 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.set_my_commit_btn()
         self.set_assigned_me_btn()
 
-    # 设置指派下拉菜单 /get_user
+    # 设置指派下拉菜单 /get_user_list
     def set_assigned_box(self):
         try:
-            req = requests.get(self.login_info["server"] + "/get_user",
+            req = requests.get(self.login_info["server"] + "/get_user_list",
                                timeout=5)
             status = json.loads(req.text)["status"]
             if status == "Success":
@@ -197,10 +197,10 @@ class MainWindow(QWidget, Ui_MainWindow):
         except TimeoutError as e:
             self.warning("TimeoutError", str(e))
 
-    # 获取产品列表 /get_product
+    # 获取产品列表 /get_product_list
     def set_product_box(self):
         try:
-            req = requests.get(self.login_info["server"] + "/get_product",
+            req = requests.get(self.login_info["server"] + "/get_product_list",
                                timeout=5)
             status = json.loads(req.text)["status"]
             if status == "Success":
@@ -215,13 +215,13 @@ class MainWindow(QWidget, Ui_MainWindow):
         except TimeoutError as e:
             self.warning("TimeoutError", str(e))
 
-    # 获取项目列表 /get_project
+    # 获取项目列表 /get_project_list
     def set_project_box(self):
         if not self.product_box.count():
             return
         current_product_id = self.product_list[self.product_box.currentText()]
         try:
-            req = requests.get(self.login_info["server"] + "/get_project",
+            req = requests.get(self.login_info["server"] + "/get_project_list",
                                params={"product_id": current_product_id},
                                timeout=5)
             status = json.loads(req.text)["status"]
@@ -240,7 +240,7 @@ class MainWindow(QWidget, Ui_MainWindow):
         except TimeoutError as e:
             self.warning("TimeoutError", str(e))
 
-    # 获取模块列表 /get_module
+    # 获取模块列表 /get_module_list
     def set_module_box(self):
         if not self.project_box.count():
             self.module_box.clear()
@@ -249,7 +249,7 @@ class MainWindow(QWidget, Ui_MainWindow):
         current_product_id = self.product_list[self.product_box.currentText()]
         current_project_id = self.project_list[self.project_box.currentText()]
         try:
-            req = requests.get(self.login_info["server"] + "/get_module",
+            req = requests.get(self.login_info["server"] + "/get_module_list",
                                params={
                                    "product_id": current_product_id,
                                    "project_id": current_project_id
@@ -271,7 +271,7 @@ class MainWindow(QWidget, Ui_MainWindow):
         except TimeoutError as e:
             self.warning("TimeoutError", str(e))
 
-    # 获取分支列表 /get_branch
+    # 获取分支列表 /get_branch_list
     def set_branch_box(self):
         if not self.module_box.count():
             self.branch_box.clear()
@@ -281,7 +281,7 @@ class MainWindow(QWidget, Ui_MainWindow):
         current_project_id = self.project_list[self.project_box.currentText()]
         current_module_id = self.module_list[self.module_box.currentText()]
         try:
-            req = requests.get(self.login_info["server"] + "/get_branch",
+            req = requests.get(self.login_info["server"] + "/get_branch_list",
                                params={
                                    "product_id": current_product_id,
                                    "project_id": current_project_id,
@@ -308,15 +308,17 @@ class MainWindow(QWidget, Ui_MainWindow):
     def set_my_commit_btn(self):
         try:
             req = requests.get(
-                self.login_info["server"] + "/get_commit",
+                self.login_info["server"] + "/get_commit_list",
                 params={
                     "creator": self.user_list[self.login_info["user_name"]],
                 },
                 timeout=5)
-            self.my_commit_list = json.loads(req.text)
-            num = len(self.my_commit_list)
-            if num > 0:
-                self.my_commit_btn.setText(f"我的提交({num})")
+            status = json.loads(req.text)["status"]
+            if status == "Success":
+                self.my_commit_list = json.loads(req.text)["data"]
+                num = len(self.my_commit_list)
+                if num > 0:
+                    self.my_commit_btn.setText(f"我的提交({num})")
         except ConnectionError as e:
             self.warning("ConnectionError", str(e))
         except TimeoutError as e:
@@ -326,15 +328,17 @@ class MainWindow(QWidget, Ui_MainWindow):
     def set_assigned_me_btn(self):
         try:
             req = requests.get(
-                self.login_info["server"] + "/get_commit",
+                self.login_info["server"] + "/get_commit_list",
                 params={
                     "assigned": self.user_list[self.login_info["user_name"]],
                 },
                 timeout=5)
-            self.assigned_me_list = json.loads(req.text)
-            num = len(self.assigned_me_list)
-            if num > 0:
-                self.assigned_me_btn.setText(f"待处理({num})")
+            status = json.loads(req.text)["status"]
+            if status == "Success":
+                self.assigned_me_list = json.loads(req.text)["data"]
+                num = len(self.assigned_me_list)
+                if num > 0:
+                    self.assigned_me_btn.setText(f"待处理({num})")
         except ConnectionError as e:
             self.warning("ConnectionError", str(e))
         except TimeoutError as e:

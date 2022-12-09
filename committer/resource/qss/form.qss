@@ -90,6 +90,14 @@ QTextEdit {
     border-radius: 10px;
 }
 
+#Meta {
+    font-size: 20px;
+    border-style: none;
+    background-color: #3e3e3e;
+    color: #eeeeee;
+    border-radius: 10px;
+}
+
 QScrollBar:vertical {
     border: none;
     background: transparent;

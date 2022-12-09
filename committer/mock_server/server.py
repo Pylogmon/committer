@@ -37,8 +37,8 @@ def login():
     return res
 
 
-@server.route('/get_user', methods=['get'])
-def get_user():
+@server.route('/get_user_list', methods=['get'])
+def get_user_list():
     path = split(realpath(__file__))[0]
 
     conn = sqlite3.connect(join(path, 'test.db'))
@@ -59,8 +59,8 @@ def get_user():
     return res
 
 
-@server.route('/get_product', methods=['get'])
-def get_product():
+@server.route('/get_product_list', methods=['get'])
+def get_product_list():
     path = split(realpath(__file__))[0]
 
     conn = sqlite3.connect(join(path, 'test.db'))
@@ -84,8 +84,8 @@ def get_product():
     return res
 
 
-@server.route('/get_project', methods=['get'])
-def get_project():
+@server.route('/get_project_list', methods=['get'])
+def get_project_list():
     product_id = flask.request.args.get("product_id")
     path = split(realpath(__file__))[0]
 
@@ -110,8 +110,8 @@ def get_project():
     return res
 
 
-@server.route('/get_module', methods=['get'])
-def get_module():
+@server.route('/get_module_list', methods=['get'])
+def get_module_list():
     product_id = flask.request.args.get("product_id")
     project_id = flask.request.args.get("project_id")
 
@@ -139,8 +139,8 @@ def get_module():
     return res
 
 
-@server.route('/get_branch', methods=['get'])
-def get_branch():
+@server.route('/get_branch_list', methods=['get'])
+def get_branch_list():
     product_id = flask.request.args.get("product_id")
     project_id = flask.request.args.get("project_id")
     module_id = flask.request.args.get("module_id")
@@ -208,7 +208,7 @@ def commit():
     return res
 
 
-@server.route('/get_commit', methods=['get'])
+@server.route('/get_commit_list', methods=['get'])
 def get_commit():
     creator = flask.request.args.get("creator")
     assigned = flask.request.args.get("assigned")
@@ -230,13 +230,179 @@ def get_commit():
         'branch_id', 'keywords', 'type', 'severity', 'pri', 'assigned', 'os',
         'browser', 'content', 'creator', 'mailto'
     ]
+    commit_list = {"status": "Success"}
     for i in values:
         data.append({})
         for j in range(len(values[0])):
             data[-1][data_list[j]] = i[j]
+    commit_list["data"] = data
     cursor.close()
     conn.close()
-    res = json.dumps(data)
+    res = json.dumps(commit_list)
+    return res
+
+
+@server.route('/get_user', methods=['get'])
+def get_user():
+    user_id = flask.request.args.get("user_id")
+
+    path = split(realpath(__file__))[0]
+
+    conn = sqlite3.connect(join(path, 'test.db'))
+    cursor = conn.cursor()
+    # 执行查询语句:
+    cursor.execute('select user_name from User where user_id=?', (user_id, ))
+
+    # 获得查询结果集:
+    values = cursor.fetchall()
+    if len(values) == 0:
+        user = {"status": "Failed", "data": {}}
+    else:
+        user_name = values[0][0]
+        user = {
+            "status": "Success",
+            "data": {
+                "user_id": user_id,
+                "user_name": user_name
+            }
+        }
+    print(user)
+    cursor.close()
+    conn.close()
+    res = json.dumps(user)
+    return res
+
+
+@server.route('/get_product', methods=['get'])
+def get_product():
+    product_id = flask.request.args.get("product_id")
+
+    path = split(realpath(__file__))[0]
+
+    conn = sqlite3.connect(join(path, 'test.db'))
+    cursor = conn.cursor()
+    # 执行查询语句:
+    cursor.execute('select product_name from Product where product_id=?',
+                   (product_id, ))
+
+    # 获得查询结果集:
+    values = cursor.fetchall()
+    if len(values) == 0:
+        product = {"status": "Failed", "data": {}}
+    else:
+        product_name = values[0][0]
+        product = {
+            "status": "Success",
+            "data": {
+                "product_id": product_id,
+                "product_name": product_name
+            }
+        }
+    cursor.close()
+    conn.close()
+    res = json.dumps(product)
+    return res
+
+
+@server.route('/get_project', methods=['get'])
+def get_project():
+    product_id = flask.request.args.get("product_id")
+    project_id = flask.request.args.get("project_id")
+
+    path = split(realpath(__file__))[0]
+
+    conn = sqlite3.connect(join(path, 'test.db'))
+    cursor = conn.cursor()
+    # 执行查询语句:
+    cursor.execute(
+        'select project_name from Project where product_id=? and project_id=?',
+        (product_id, project_id))
+
+    # 获得查询结果集:
+    values = cursor.fetchall()
+    if len(values) == 0:
+        project = {"status": "Failed", "data": {}}
+    else:
+        project_name = values[0][0]
+        project = {
+            "status": "Success",
+            "data": {
+                "project_id": project_id,
+                "project_name": project_name
+            }
+        }
+    cursor.close()
+    conn.close()
+    res = json.dumps(project)
+    return res
+
+
+@server.route('/get_module', methods=['get'])
+def get_module():
+    product_id = flask.request.args.get("product_id")
+    project_id = flask.request.args.get("project_id")
+    module_id = flask.request.args.get("module_id")
+
+    path = split(realpath(__file__))[0]
+
+    conn = sqlite3.connect(join(path, 'test.db'))
+    cursor = conn.cursor()
+    # 执行查询语句:
+    cursor.execute(
+        'select module_name from Module where product_id=? and project_id=? and module_id=?',
+        (product_id, project_id, module_id))
+
+    # 获得查询结果集:
+    values = cursor.fetchall()
+    if len(values) == 0:
+        module = {"status": "Failed", "data": {}}
+    else:
+        module_name = values[0][0]
+        module = {
+            "status": "Success",
+            "data": {
+                "module_id": module_id,
+                "module_name": module_name
+            }
+        }
+    cursor.close()
+    conn.close()
+    res = json.dumps(module)
+    return res
+
+
+@server.route('/get_branch', methods=['get'])
+def get_branch():
+    product_id = flask.request.args.get("product_id")
+    project_id = flask.request.args.get("project_id")
+    module_id = flask.request.args.get("module_id")
+    branch_id = flask.request.args.get("branch_id")
+
+    path = split(realpath(__file__))[0]
+
+    conn = sqlite3.connect(join(path, 'test.db'))
+    cursor = conn.cursor()
+    # 执行查询语句:
+    cursor.execute(
+        'select branch_name from Branch where product_id=? and project_id=? and module_id=? and branch_id=?',
+        (product_id, project_id, module_id, branch_id))
+
+    # 获得查询结果集:
+    values = cursor.fetchall()
+    if len(values) == 0:
+        branch = {"status": "Failed", "data": {}}
+    else:
+        branch_name = values[0][0]
+        branch = {
+            "status": "Success",
+            "data": {
+                "branch_id": branch_id,
+                "branch_name": branch_name
+            }
+        }
+    cursor.close()
+    conn.close()
+    res = json.dumps(branch)
     return res
 
 
