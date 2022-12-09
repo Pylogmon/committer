@@ -61,6 +61,7 @@ class Ui_Login(object):
         self.password_edit.setObjectName(u"password_edit")
         self.password_edit.setMinimumSize(QSize(250, 0))
         self.password_edit.setEchoMode(QLineEdit.Password)
+        self.password_edit.setClearButtonEnabled(False)
 
         self.gridLayout.addWidget(self.password_edit, 2, 1, 1, 1)
 

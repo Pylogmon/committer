@@ -113,11 +113,9 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.project_box.setEnabled(False)
         self.module_box.setEnabled(False)
         self.branch_box.setEnabled(False)
-        self.assigned_box.setEditable(True)
         qss_file = QFile(":/qss/mainwindow.qss")
         qss_file.open(QFile.ReadOnly)
         qss = str(qss_file.readAll(), encoding="utf-8")
-        print(qss)
         self.setStyleSheet(qss)
 
     def set_boxes(self):

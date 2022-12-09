@@ -1,66 +1,11 @@
 /* 主窗体样式 */
-#MainWindow {
+#Form {
     background-color: #212121;
 }
 
 /* Label样式 */
 QLabel {
     color: #eeeeee;
-}
-
-/* 行编辑器样式 */
-QLineEdit {
-    font-size: 20px;
-    border-style: none;
-    background-color: #3e3e3e;
-    color: #eeeeee;
-    height: 44px;
-    border-radius: 10px;
-}
-
-/* 编辑器样式 */
-QTextEdit {
-    font-size: 20px;
-    border-style: none;
-    background-color: #3e3e3e;
-    color: #eeeeee;
-    border-radius: 10px;
-}
-
-/* 按钮样式 */
-QPushButton {
-    border-style: solid;
-    border-width: 2px;
-    border-color: #444444;
-    border-radius: 10px;
-    background-color: #333333;
-    color: #eeeeee;
-    height: 40px;
-    font-size: 20px;
-}
-
-/* 按钮样式 悬停 */
-QPushButton:hover {
-    border-style: solid;
-    border-width: 2px;
-    border-color: #444444;
-    border-radius: 10px;
-    background-color: #3e3e3e;
-    color: #eeeeee;
-    height: 40px;
-    font-size: 20px;
-}
-
-/* 按钮样式 按下 */
-QPushButton:pressed {
-    border-style: solid;
-    border-width: 2px;
-    border-color: #444444;
-    border-radius: 10px;
-    background-color: #333333;
-    color: #eeeeee;
-    height: 40px;
-    font-size: 18px;
 }
 
 /* 下拉菜单样式 */

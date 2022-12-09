@@ -1,45 +1,50 @@
+/* 主窗体样式 */
 #Login {
-background-color:#212121;
+    background-color: #212121;
 }
 
+/* 行编辑器样式 */
 QLineEdit {
-/* 编辑器样式 */
-font-size:20px;
-border-style: none;
-background-color: #3e3e3e;
-color: #dddddd;
-height:40px;
-border-radius:10px;
+    font-size: 20px;
+    border-style: none;
+    background-color: #3e3e3e;
+    color: #eeeeee;
+    height: 40px;
+    border-radius: 10px;
 }
 
-/* 添加频道按钮样式 */
+/* 按钮样式 */
 QPushButton {
-border-style:solid;
-border-width:2px;
-border-color:#444444;
-border-radius:10px;
-background-color:#333333;
-color:#dddddd;
-height:40px;
-font-size:20px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #444444;
+    border-radius: 10px;
+    background-color: #333333;
+    color: #eeeeee;
+    height: 40px;
+    font-size: 20px;
 }
+
+/* 按钮样式 悬停 */
 QPushButton:hover {
-border-style:solid;
-border-width:2px;
-border-color:#444444;
-border-radius:10px;
-background-color:#3e3e3e;
-color:#dddddd;
-height:40px;
-font-size:20px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #444444;
+    border-radius: 10px;
+    background-color: #3e3e3e;
+    color: #eeeeee;
+    height: 40px;
+    font-size: 20px;
 }
+
+/* 按钮样式 按下 */
 QPushButton:pressed {
-border-style:solid;
-border-width:2px;
-border-color:#444444;
-border-radius:10px;
-background-color:#333333;
-color:#dddddd;
-height:40px;
-font-size:18px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #444444;
+    border-radius: 10px;
+    background-color: #333333;
+    color: #eeeeee;
+    height: 40px;
+    font-size: 18px;
 }
